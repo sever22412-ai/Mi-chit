@@ -12,6 +12,7 @@
             --neon-cyan: #00f3ff;
             --neon-red: #ff003c;
             --neon-green: #00ff66;
+            --neon-purple: #b026ff;
             --text-main: #e0e0e0;
         }
 
@@ -32,6 +33,8 @@
                 radial-gradient(circle at 15% 50%, rgba(255, 0, 60, 0.08), transparent 25%),
                 radial-gradient(circle at 85% 30%, rgba(0, 243, 255, 0.08), transparent 25%);
             background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Красивый фон-сетка */
@@ -86,7 +89,8 @@
             display: flex;
             flex-direction: column;
             gap: 25px;
-            padding-bottom: 50px;
+            padding-bottom: 30px;
+            flex: 1; /* Чтобы футер был всегда внизу */
         }
 
         /* Карточки (Glassmorphism) */
@@ -152,7 +156,7 @@
             margin: 0;
             padding: 15px;
             font-size: 0.75rem;
-            color: #00ff66; /* Зеленый терминал */
+            color: #00ff66;
             overflow-x: auto;
             overflow-y: auto;
             height: 100%;
@@ -165,7 +169,6 @@
         pre::-webkit-scrollbar-track { background: #111; }
         pre::-webkit-scrollbar-thumb { background: #333; border-radius: 5px; }
 
-        /* Градиент затухания снизу кода */
         .code-fade {
             position: absolute;
             bottom: 0; left: 0; width: 100%; height: 30px;
@@ -210,24 +213,72 @@
             left: 100%;
         }
 
-        .copy-btn.cyan-btn {
-            background: linear-gradient(135deg, #005f73, #0a9396);
-            box-shadow: 0 4px 15px rgba(10, 147, 150, 0.4);
-        }
-        .copy-btn.cyan-btn:active { transform: scale(0.97); }
+        .copy-btn.cyan-btn { background: linear-gradient(135deg, #005f73, #0a9396); box-shadow: 0 4px 15px rgba(10, 147, 150, 0.4); }
+        .copy-btn.red-btn { background: linear-gradient(135deg, #800020, #ff003c); box-shadow: 0 4px 15px rgba(255, 0, 60, 0.4); }
+        .copy-btn.green-btn { background: linear-gradient(135deg, #1b4332, #00ff66); box-shadow: 0 4px 15px rgba(0, 255, 102, 0.4); color: #000; }
+        .copy-btn:active { transform: scale(0.97); }
 
-        .copy-btn.red-btn {
-            background: linear-gradient(135deg, #800020, #ff003c);
-            box-shadow: 0 4px 15px rgba(255, 0, 60, 0.4);
+        /* Футер (Подвал сайта) */
+        footer {
+            margin-top: auto;
+            padding: 30px 20px;
+            text-align: center;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            border-top: 1px solid rgba(176, 38, 255, 0.3); /* Фиолетовая полоса */
+            position: relative;
+            overflow: hidden;
         }
-        .copy-btn.red-btn:active { transform: scale(0.97); }
 
-        .copy-btn.green-btn {
-            background: linear-gradient(135deg, #1b4332, #00ff66);
-            box-shadow: 0 4px 15px rgba(0, 255, 102, 0.4);
-            color: #000;
+        /* Неоновая линия сверху футера */
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+            box-shadow: 0 0 10px var(--neon-purple);
         }
-        .copy-btn.green-btn:active { transform: scale(0.97); }
+
+        .meme-img {
+            max-width: 200px;
+            border-radius: 10px;
+            border: 2px solid var(--neon-purple);
+            box-shadow: 0 0 15px rgba(176, 38, 255, 0.5);
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        .meme-img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .credits-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-purple);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        .credits-text {
+            font-size: 0.9rem;
+            color: #bbb;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .unique-slogan {
+            font-size: 1rem;
+            color: var(--neon-cyan);
+            font-weight: bold;
+            text-shadow: 0 0 8px var(--neon-cyan);
+            letter-spacing: 2px;
+            margin-top: 15px;
+            animation: pulseCyan 2s infinite alternate;
+        }
+
+        @keyframes pulseCyan {
+            from { text-shadow: 0 0 5px var(--neon-cyan); }
+            to { text-shadow: 0 0 15px var(--neon-cyan), 0 0 25px var(--neon-cyan); }
+        }
 
         /* Всплывающее уведомление (Toast) */
         #toast {
@@ -250,6 +301,7 @@
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), visibility 0.4s;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
         }
 
@@ -270,11 +322,26 @@
         <!-- Сюда JS будет вставлять карточки -->
     </div>
 
+    <!-- ПОДВАЛ САЙТА (ФУТЕР) -->
+    <footer>
+        <!-- Мем (ссылка на картинку с мемом) -->
+        <img src="https://i.imgur.com/8QO9y8k.png" alt="Meme" class="meme-img">
+        
+        <div class="credits-title">Create Kola and DeepSeek</div>
+        
+        <div class="credits-text">
+            💻 Сайт и скрипты созданы при поддержке <b>DeepSeek AI</b>.<br>
+            🤝 Огромная помощь в коде и дизайне.
+        </div>
+        
+        <div class="unique-slogan">✨ Каждый уникален ✨</div>
+    </footer>
+
     <!-- Всплывающее окно -->
     <div id="toast">✅ Скрипт скопирован!</div>
 
     <script>
-        // Твои скрипты
+        // Твои скрипты (не менял)
         const scripts = [
             {
                 id: "voz",
@@ -928,7 +995,6 @@ Players.PlayerRemoving:Connect(function(plr) removeESP(plr) end)`
             }
         ];
 
-        // Функция для создания карточек на странице
         const container = document.getElementById('scripts-container');
 
         scripts.forEach(script => {
@@ -951,11 +1017,9 @@ Players.PlayerRemoving:Connect(function(plr) removeESP(plr) end)`
 
             container.appendChild(card);
             
-            // Вставляем код через textContent, чтобы HTML-теги внутри Lua не ломали страницу
             document.getElementById(`code-${script.id}`).textContent = script.code;
         });
 
-        // Функция копирования
         function copyCode(id) {
             const codeElement = document.getElementById(`code-${id}`);
             const textToCopy = codeElement.textContent;
@@ -963,7 +1027,6 @@ Players.PlayerRemoving:Connect(function(plr) removeESP(plr) end)`
             navigator.clipboard.writeText(textToCopy).then(() => {
                 showToast();
             }).catch(err => {
-                // Фоллбэк для старых браузеров
                 const textArea = document.createElement("textarea");
                 textArea.value = textToCopy;
                 document.body.appendChild(textArea);
@@ -974,7 +1037,6 @@ Players.PlayerRemoving:Connect(function(plr) removeESP(plr) end)`
             });
         }
 
-        // Красивое всплывающее уведомление
         function showToast() {
             const toast = document.getElementById("toast");
             toast.className = "show";
