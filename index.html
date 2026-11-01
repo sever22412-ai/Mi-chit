@@ -140,6 +140,23 @@
             color: #fff;
             font-weight: bold;
             text-shadow: 0 0 10px rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Иконки для карточек */
+        .icon-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            width: 35px;
+            height: 35px;
+            font-size: 1.2rem;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
         }
 
         /* Блок с кодом */
@@ -249,7 +266,7 @@
         }
         .meme-img:hover { transform: scale(1.05) rotate(2deg); }
 
-        /* Предупреждение в подвале (про Бога) */
+        /* Предупреждение в подвале */
         .warning-box {
             background: rgba(255, 153, 0, 0.08);
             border: 1px solid rgba(255, 153, 0, 0.4);
@@ -292,7 +309,35 @@
             line-height: 1.6;
         }
 
-        /* ===== ВСПЛЫВАЮЩЕЕ ОКНО ПРИ ЗАГРУЗКЕ (МОДАЛЬНОЕ) ===== */
+        /* ===== КНОПКА "НАВЕРХ" ===== */
+        #scrollTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            border: 2px solid var(--neon-cyan);
+            background: rgba(20, 20, 25, 0.9);
+            color: var(--neon-cyan);
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 20px;
+            font-family: 'Orbitron', sans-serif;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+            transition: all 0.3s;
+            width: 55px;
+            height: 55px;
+            align-items: center;
+            justify-content: center;
+        }
+        #scrollTopBtn:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.8);
+        }
+
+        /* ===== ВСПЛЫВАЮЩЕЕ ОКНО ПРИ ЗАГРУЗКЕ ===== */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -363,7 +408,6 @@
             text-align: center;
         }
 
-        /* Обычный мелкий шрифт для текста */
         .modal-text {
             font-family: Arial, sans-serif;
             font-size: 0.9rem;
@@ -404,7 +448,10 @@
 </head>
 <body>
 
-    <!-- НОВОЕ ВСПЛЫВАЮЩЕЕ ОКНО ПРИ ЗАГРУЗКЕ -->
+    <!-- Кнопка Наверх -->
+    <button id="scrollTopBtn" onclick="scrollToTop()">▲</button>
+
+    <!-- ВСПЛЫВАЮЩЕЕ ОКНО ПРИ ЗАГРУЗКЕ -->
     <div id="infoModal" class="modal-overlay">
         <div class="modal-content">
             <button class="close-modal" onclick="closeInfoModal()">✕</button>
@@ -431,7 +478,7 @@
         <!-- Твой мем -->
         <img src="https://avatars.mds.yandex.net/i?id=80448eaa5dda6de3eac8ac9fcffa7beb_l-12602658-images-thumbs&n=13" alt="Meme" class="meme-img">
 
-        <!-- Предупреждение про Бога (осталось как было) -->
+        <!-- Предупреждение про Бога -->
         <div class="warning-box">
             <div class="warning-title">⚠️ ВАЖНОЕ УВЕДОМЛЕНИЕ</div>
             <div class="warning-text">
@@ -439,11 +486,11 @@
             </div>
         </div>
 
-        <div class="credits-title">Create Kola and DeepSeek</div>
+        <div class="credits-title">Create Kola</div>
         
         <div class="credits-text">
-            💻 Сайт и скрипты созданы при поддержке <b>DeepSeek AI</b>.<br>
-            🤝 Огромная помощь в коде и дизайне.
+            💻 Разработчик и дизайнер: <b>Kola</b><br>
+            ⚡ Технический ассистент: DeepSeek AI
         </div>
     </footer>
 
@@ -451,16 +498,31 @@
     <div id="toast">✅ Скрипт скопирован!</div>
 
     <script>
+        // --- Логика кнопки Наверх ---
+        window.onscroll = function() {
+            let btn = document.getElementById("scrollTopBtn");
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                btn.style.display = "flex";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         // Функция закрытия окна с информацией
         function closeInfoModal() {
             document.getElementById('infoModal').classList.add('hidden');
         }
 
-        // Твои скрипты
+        // Твои скрипты с добавленными иконками
         const scripts = [
             {
                 id: "voz",
-                title: "☠️ VOZMEZDIE",
+                icon: "☠️",
+                title: "VOZMEZDIE",
                 desc: "Мега-хитбоксы (Огромные головы) + Снайперский зум (FOV)",
                 colorClass: "red",
                 btnClass: "red-btn",
@@ -781,7 +843,8 @@ updateFOV(originalFOV)`
             },
             {
                 id: "tp",
-                title: "🚀 Instant TP",
+                icon: "🚀",
+                title: "Instant TP",
                 desc: "Мгновенный телепорт к выбранному игроку",
                 colorClass: "cyan",
                 btnClass: "cyan-btn",
@@ -944,7 +1007,8 @@ refreshPlayers()`
             },
             {
                 id: "esp",
-                title: "🎯 ESP + AIM + God Mode",
+                icon: "🎯",
+                title: "ESP + AIM + God Mode",
                 desc: "Видеть врагов сквозь стены, автонаведение и бессмертие",
                 colorClass: "green",
                 btnClass: "green-btn",
@@ -1118,7 +1182,10 @@ Players.PlayerRemoving:Connect(function(plr) removeESP(plr) end)`
 
             card.innerHTML = `
                 <div class="card-header">
-                    <div class="card-title">${script.title}</div>
+                    <div class="card-title">
+                        <div class="icon-box">${script.icon}</div>
+                        ${script.title}
+                    </div>
                 </div>
                 <div style="font-size: 0.8rem; color: #aaa; margin-bottom: 15px;">${script.desc}</div>
                 <div class="code-container">
