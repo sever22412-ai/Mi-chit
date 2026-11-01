@@ -13,6 +13,7 @@
             --neon-red: #ff003c;
             --neon-green: #00ff66;
             --neon-purple: #b026ff;
+            --neon-orange: #ff9900;
             --text-main: #e0e0e0;
         }
 
@@ -224,6 +225,9 @@
             border-top: 1px solid rgba(176, 38, 255, 0.3);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         footer::before {
@@ -234,16 +238,45 @@
             box-shadow: 0 0 10px var(--neon-purple);
         }
 
+        /* Стиль для мема */
         .meme-img {
-            max-width: 180px;
+            max-width: 220px;
             border-radius: 10px;
             border: 2px solid var(--neon-purple);
             box-shadow: 0 0 15px rgba(176, 38, 255, 0.5);
             margin-bottom: 20px;
             transition: transform 0.3s;
-            background-color: #fff;
         }
         .meme-img:hover { transform: scale(1.05) rotate(2deg); }
+
+        /* Предупреждение в подвале (про Бога) */
+        .warning-box {
+            background: rgba(255, 153, 0, 0.08);
+            border: 1px solid rgba(255, 153, 0, 0.4);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 0 auto 20px auto;
+            max-width: 500px;
+            text-align: left;
+            font-size: 0.75rem;
+            color: #ffcc00;
+            box-shadow: 0 0 15px rgba(255, 153, 0, 0.15);
+        }
+
+        .warning-title {
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .warning-text {
+            color: #ccc;
+            line-height: 1.5;
+        }
 
         .credits-title {
             font-family: 'Orbitron', sans-serif;
@@ -254,25 +287,88 @@
         }
 
         .credits-text {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #bbb;
             line-height: 1.6;
-            margin-bottom: 10px;
         }
 
-        .unique-slogan {
-            font-size: 1rem;
-            color: var(--neon-cyan);
+        /* ===== ВСПЛЫВАЮЩЕЕ ОКНО ПРИ ЗАГРУЗКЕ (МОДАЛЬНОЕ) ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .modal-content {
+            background: rgba(20, 20, 25, 0.95);
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.3), inset 0 0 20px rgba(0, 243, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px 20px;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+            text-align: left;
+            transform: scale(1);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.hidden .modal-content {
+            transform: scale(0.9);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -15px; right: -15px;
+            background: #ff003c;
+            color: white;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            width: 35px; height: 35px;
             font-weight: bold;
-            text-shadow: 0 0 8px var(--neon-cyan);
-            letter-spacing: 2px;
-            margin-top: 15px;
-            animation: pulseCyan 2s infinite alternate;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 0, 60, 0.8);
+            transition: transform 0.2s, background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
         }
 
-        @keyframes pulseCyan {
-            from { text-shadow: 0 0 5px var(--neon-cyan); }
-            to { text-shadow: 0 0 15px var(--neon-cyan), 0 0 25px var(--neon-cyan); }
+        .close-modal:active {
+            transform: scale(0.8);
+            background: #b0002a;
+        }
+
+        .modal-title {
+            color: var(--neon-cyan);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
+            text-align: center;
+        }
+
+        /* Обычный мелкий шрифт для текста */
+        .modal-text {
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
+            color: #ddd;
+            line-height: 1.6;
         }
 
         /* Всплывающее уведомление (Toast) */
@@ -308,6 +404,19 @@
 </head>
 <body>
 
+    <!-- НОВОЕ ВСПЛЫВАЮЩЕЕ ОКНО ПРИ ЗАГРУЗКЕ -->
+    <div id="infoModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeInfoModal()">✕</button>
+            <div class="modal-title">📢 ИНФОРМАЦИЯ</div>
+            <div class="modal-text">
+                Все представленные здесь скрипты были созданы специально для шутеров и популярных плейсов. Одним из таких является <b>War Tycoon</b>. 
+                <br><br>
+                Используйте их с умом и на свой страх и риск!
+            </div>
+        </div>
+    </div>
+
     <header>
         <h1>☠️ VOZMEZDIE HUB ☠️</h1>
         <div class="subtitle">by sever22412-ai</div>
@@ -319,23 +428,34 @@
 
     <!-- ПОДВАЛ САЙТА (ФУТЕР) -->
     <footer>
-        <!-- Пофикшенная картинка мема (Троллфейс) -->
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Trollface.svg/800px-Trollface.svg.png" alt="Meme" class="meme-img">
-        
+        <!-- Твой мем -->
+        <img src="https://avatars.mds.yandex.net/i?id=80448eaa5dda6de3eac8ac9fcffa7beb_l-12602658-images-thumbs&n=13" alt="Meme" class="meme-img">
+
+        <!-- Предупреждение про Бога (осталось как было) -->
+        <div class="warning-box">
+            <div class="warning-title">⚠️ ВАЖНОЕ УВЕДОМЛЕНИЕ</div>
+            <div class="warning-text">
+                Дорогие игроки, некоторые функции могут работать не так, как это задумывалось. Режим бога может не работать. В следующем обновлении я выпущу новую версию и улучшу скрипты.
+            </div>
+        </div>
+
         <div class="credits-title">Create Kola and DeepSeek</div>
         
         <div class="credits-text">
             💻 Сайт и скрипты созданы при поддержке <b>DeepSeek AI</b>.<br>
             🤝 Огромная помощь в коде и дизайне.
         </div>
-        
-        <div class="unique-slogan">✨ Каждый уникален ✨</div>
     </footer>
 
-    <!-- Всплывающее окно -->
+    <!-- Всплывающее окно (Скопировано) -->
     <div id="toast">✅ Скрипт скопирован!</div>
 
     <script>
+        // Функция закрытия окна с информацией
+        function closeInfoModal() {
+            document.getElementById('infoModal').classList.add('hidden');
+        }
+
         // Твои скрипты
         const scripts = [
             {
