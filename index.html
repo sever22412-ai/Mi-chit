@@ -377,7 +377,7 @@
 
         /* Спец стили для окна инструкции */
         #instructionModal {
-            z-index: 10000; /* Поверх первого окна */
+            z-index: 10000;
         }
         #instructionModal .modal-content {
             max-height: 85vh;
@@ -472,6 +472,8 @@
             border-radius: 8px;
             margin: 10px 0;
             border: 1px solid var(--neon-purple);
+            background: white;
+            padding: 5px;
         }
 
         /* Всплывающее уведомление (Toast) */
@@ -551,7 +553,8 @@
                 <div class="inst-text">Следующие шаги:</div>
                 <div class="inst-desc" style="margin-bottom: 5px;">Скопируйте нужный вам скрипт:</div>
                 
-                <img src="https://iimg.su/i/P1yzB5" alt="DeepSeek" class="inst-deepseek">
+                <!-- Картинка DeepSeek -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/DeepSeek_logo.svg/512px-DeepSeek_logo.svg.png" alt="DeepSeek" class="inst-deepseek">
 
                 <div class="inst-desc">
                     Далее вставьте скрипт в редактор кода и нажмите <b>Execute</b>. Пользуйтесь!
@@ -1327,4 +1330,4 @@ Players.PlayerRemoving:Connect(function(plr) removeESP(plr) end)`
         }
     </script>
 </body>
-    </html>
+        </html>
