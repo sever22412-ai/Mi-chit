@@ -337,7 +337,7 @@
             box-shadow: 0 0 25px rgba(0, 243, 255, 0.8);
         }
 
-        /* ===== ВСПЛЫВАЮЩЕЕ ОКНО ПРИ ЗАГРУЗКЕ ===== */
+        /* ===== МОДАЛЬНЫЕ ОКНА ===== */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -375,6 +375,18 @@
             transform: scale(0.9);
         }
 
+        /* Спец стили для окна инструкции */
+        #instructionModal {
+            z-index: 10000; /* Поверх первого окна */
+        }
+        #instructionModal .modal-content {
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        #instructionModal .modal-content::-webkit-scrollbar { width: 5px; }
+        #instructionModal .modal-content::-webkit-scrollbar-track { background: transparent; }
+        #instructionModal .modal-content::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 5px; }
+
         .close-modal {
             position: absolute;
             top: -15px; right: -15px;
@@ -392,6 +404,7 @@
             align-items: center;
             justify-content: center;
             font-size: 16px;
+            z-index: 10;
         }
 
         .close-modal:active {
@@ -413,6 +426,52 @@
             font-size: 0.9rem;
             color: #ddd;
             line-height: 1.6;
+        }
+
+        /* Инструкция внутри 2-го окна */
+        .inst-text {
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .inst-img-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.05);
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .inst-img-row img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--neon-cyan);
+        }
+        .inst-img-row span {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            color: var(--neon-cyan);
+            font-size: 1rem;
+        }
+        .inst-desc {
+            font-size: 0.85rem;
+            color: #bbb;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .inst-warn {
+            color: var(--neon-green);
+            font-weight: bold;
+        }
+        .inst-deepseek {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 1px solid var(--neon-purple);
         }
 
         /* Всплывающее уведомление (Toast) */
@@ -451,7 +510,7 @@
     <!-- Кнопка Наверх -->
     <button id="scrollTopBtn" onclick="scrollToTop()">▲</button>
 
-    <!-- ВСПЛЫВАЮЩЕЕ ОКНО ПРИ ЗАГРУЗКЕ -->
+    <!-- ПЕРВОЕ ОКНО (Информация) -->
     <div id="infoModal" class="modal-overlay">
         <div class="modal-content">
             <button class="close-modal" onclick="closeInfoModal()">✕</button>
@@ -460,6 +519,43 @@
                 Все представленные здесь скрипты были созданы специально для шутеров и популярных плейсов. Одним из таких является <b>War Tycoon</b>. 
                 <br><br>
                 Используйте их с умом и на свой страх и риск!
+            </div>
+        </div>
+    </div>
+
+    <!-- ВТОРОЕ ОКНО (Инструкция через 10 сек) -->
+    <div id="instructionModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeInstructionModal()">✕</button>
+            <div class="modal-title">📖 Инструкция</div>
+            
+            <div class="modal-text">
+                <div class="inst-text">Если вы новичок и не познали азы — вот краткая инструкция:</div>
+                
+                <div class="inst-img-row">
+                    <img src="https://static-sg.winudf.com/wupload/xy/aprojectadmin/Hf4bnX2v.jpg" alt="Delta">
+                    <span>DELTA Экзекутер</span>
+                </div>
+                <div class="inst-img-row">
+                    <img src="https://avatars.mds.yandex.net/i?id=7226dad425dbbd6330a10ecfe676a901_l-6696526-images-thumbs&n=13" alt="Arceus X">
+                    <span>Arceus X Neo</span>
+                </div>
+
+                <div class="inst-desc">
+                    Установите Экзекутор, смотря какое у вас устройство. Зайдите в ваш Экзекутор и получите ключ.<br><br>
+                    <span class="inst-warn">Для Arceus X Neo ключ не нужен!</span><br><br>
+                    Для Delta скопируйте и перейдите по ссылке, выполните задание и получите ключ.<br><br>
+                    Итак, теперь вы познали первые шаги.
+                </div>
+
+                <div class="inst-text">Следующие шаги:</div>
+                <div class="inst-desc" style="margin-bottom: 5px;">Скопируйте нужный вам скрипт:</div>
+                
+                <img src="https://iimg.su/i/P1yzB5" alt="DeepSeek" class="inst-deepseek">
+
+                <div class="inst-desc">
+                    Далее вставьте скрипт в редактор кода и нажмите <b>Execute</b>. Пользуйтесь!
+                </div>
             </div>
         </div>
     </div>
@@ -475,10 +571,8 @@
 
     <!-- ПОДВАЛ САЙТА (ФУТЕР) -->
     <footer>
-        <!-- Твой мем -->
         <img src="https://avatars.mds.yandex.net/i?id=80448eaa5dda6de3eac8ac9fcffa7beb_l-12602658-images-thumbs&n=13" alt="Meme" class="meme-img">
 
-        <!-- Предупреждение про Бога -->
         <div class="warning-box">
             <div class="warning-title">⚠️ ВАЖНОЕ УВЕДОМЛЕНИЕ</div>
             <div class="warning-text">
@@ -487,14 +581,12 @@
         </div>
 
         <div class="credits-title">Create Kola</div>
-        
         <div class="credits-text">
             💻 Разработчик и дизайнер: <b>Kola</b><br>
             ⚡ Технический ассистент: DeepSeek AI
         </div>
     </footer>
 
-    <!-- Всплывающее окно (Скопировано) -->
     <div id="toast">✅ Скрипт скопирован!</div>
 
     <script>
@@ -512,12 +604,21 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Функция закрытия окна с информацией
+        // --- Логика Окон ---
         function closeInfoModal() {
             document.getElementById('infoModal').classList.add('hidden');
         }
 
-        // Твои скрипты с добавленными иконками
+        function closeInstructionModal() {
+            document.getElementById('instructionModal').classList.add('hidden');
+        }
+
+        // Показываем инструкцию через 10 секунд (10000 миллисекунд)
+        setTimeout(function() {
+            document.getElementById('instructionModal').classList.remove('hidden');
+        }, 10000);
+
+        // Твои скрипты
         const scripts = [
             {
                 id: "voz",
