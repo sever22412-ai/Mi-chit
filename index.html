@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой Cheat Hub</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 15px;
+        }
+        h1 {
+            text-align: center;
+            color: #00ffcc;
+            text-shadow: 0 0 10px #00ffcc;
+        }
+        .script-card {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .script-title {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        .script-code {
+            background-color: #0a0a0a;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            color: #00ffcc;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 180px;
+            overflow-y: auto;
+            border: 1px solid #222;
+        }
+        .copy-btn {
+            background-color: #00cc66;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.2s;
+        }
+        .copy-btn:active {
+            background-color: #00994d;
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>☠️ VOZMEZDIE HUB ☠️</h1>
+
+    <!-- СКРИПТ 1: VOZMEZDIE (Mega Hitbox + Zoom) -->
+    <div class="script-card">
+        <div class="script-title">🔥 1. VOZMEZDIE (Огромные головы + Зум)</div>
+        <div class="script-code" id="script1">
+-- ☠️ VOZMEZDIE ☠️ (Mega Hitbox + Zoom/FOV Combo)
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local Workspace = game:GetService("Workspace")
+local Camera = Workspace.CurrentCamera
+local LP = Players.LocalPlayer
+
+local sg = Instance.new("ScreenGui")
+sg.Name = "VozmezdieGui"
+sg.ResetOnSpawn = false
+sg.Parent = LP:WaitForChild("PlayerGui")
+
+local main = Instance.new("Frame")
+main.Size = UDim2.new(0, 240, 0, 380)
+main.Position = UDim2.new(0.5, -120, 0.2, 0)
+main.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
+main.BorderSizePixel = 0
+main.Active = true
+main.Draggable = true
+main.Parent = sg
+Instance.new("UICorner", main).CornerRadius = UDim.new(0, 10)
+local stroke = Instance.new("UIStroke", main)
+stroke.Color = Color3.fromRGB(255, 0, 0)
+stroke.Thickness = 2
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, -80, 0, 30)
+title.Position = UDim2.new(0, 10, 0, 5)
+title.BackgroundTransparency = 1
+title.Text = "☠️ VOZMEZDIE ☠️"
+title.TextColor3 = Color3.fromRGB(255, 50, 50)
+title.Font = Enum.Font.GothamBlack
+title.TextSize = 16
+title.TextXAlignment = Enum.TextXAlignment.Left
+title.Parent = main
+
+local collapseBtn = Instance.new("TextButton")
+collapseBtn.Size = UDim2.new(0, 30, 0, 30)
+collapseBtn.Position = UDim2.new(1, -70, 0, 5)
+collapseBtn.BackgroundColor3 = Color3.fromRGB(241, 196, 15)
+collapseBtn.Text = "—"
+collapseBtn.TextColor3 = Color3.new(1,1,1)
+collapseBtn.Font = Enum.Font.GothamBold
+collapseBtn.TextSize = 16
+collapseBtn.Parent = main
+Instance.new("UICorner", collapseBtn).CornerRadius = UDim.new(0, 6)
+
+local closeBtn = Instance.new("TextButton")
+closeBtn.Size = UDim2.new(0, 30, 0, 30)
+closeBtn.Position = UDim2.new(1, -35, 0, 5)
+closeBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+closeBtn.Text = "X"
+closeBtn.TextColor3 = Color3.new(1,1,1)
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextSize = 14
+closeBtn.Parent = main
+Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(0, 6)
+
+local showBtn = Instance.new("TextButton")
+showBtn.Size = UDim2.new(0, 60, 0, 40)
+showBtn.Position = UDim2.new(0, 10, 0.3, 0)
+showBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+showBtn.Text = "МЕНЮ"
+showBtn.TextColor3 = Color3.new(1,1,1)
+showBtn.Font = Enum.Font.GothamBold
+showBtn.TextSize = 12
+showBtn.Visible = false
+showBtn.Parent = sg
+Instance.new("UICorner", showBtn).CornerRadius = UDim.new(0, 8)
+
+local container = Instance.new("Frame")
+container.Size = UDim2.new(1, 0, 1, -40)
+container.Position = UDim2.new(0, 0, 0, 40)
+container.BackgroundTransparency = 1
+container.Parent = main
+
+local hitboxBtn = Instance.new("TextButton")
+hitboxBtn.Size = UDim2.new(1, -20, 0, 45)
+hitboxBtn.Position = UDim2.new(0, 10, 0, 5)
+hitboxBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+hitboxBtn.Text = "🔥 ОГРОМНЫЕ ГОЛОВЫ: ВЫКЛ"
+hitboxBtn.TextColor3 = Color3.new(1,1,1)
+hitboxBtn.Font = Enum.Font.GothamBold
+hitboxBtn.TextSize = 13
+hitboxBtn.Parent = container
+Instance.new("UICorner", hitboxBtn).CornerRadius = UDim.new(0, 6)
+
+local fovLbl = Instance.new("TextLabel")
+fovLbl.Size = UDim2.new(1, -20, 0, 20)
+fovLbl.Position = UDim2.new(0, 10, 0, 60)
+fovLbl.BackgroundTransparency = 1
+fovLbl.Text = "Приближение (FOV): 70"
+fovLbl.TextColor3 = Color3.fromRGB(200, 200, 200)
+fovLbl.Font = Enum.Font.GothamBold
+fovLbl.TextSize = 12
+fovLbl.TextXAlignment = Enum.TextXAlignment.Left
+fovLbl.Parent = container
+
+local fovSlider = Instance.new("TextButton")
+fovSlider.Size = UDim2.new(1, -20, 0, 10)
+fovSlider.Position = UDim2.new(0, 10, 0, 85)
+fovSlider.BackgroundColor3 = Color3.fromRGB(50, 50, 60)
+fovSlider.Text = ""
+fovSlider.AutoButtonColor = false
+fovSlider.Parent = container
+Instance.new("UICorner", fovSlider).CornerRadius = UDim.new(0, 5)
+
+local fovFill = Instance.new("Frame")
+fovFill.Size = UDim2.new(0.5, 0, 1, 0)
+fovFill.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+fovFill.BorderSizePixel = 0
+fovFill.Parent = fovSlider
+Instance.new("UICorner", fovFill).CornerRadius = UDim.new(0, 5)
+
+local fovKnob = Instance.new("Frame")
+fovKnob.Size = UDim2.new(0, 18, 0, 18)
+fovKnob.Position = UDim2.new(0.5, -9, 0.5, -9)
+fovKnob.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+fovKnob.BorderSizePixel = 0
+fovKnob.Parent = fovSlider
+Instance.new("UICorner", fovKnob).CornerRadius = UDim.new(1, 0)
+
+local camDistLbl = Instance.new("TextLabel")
+camDistLbl.Size = UDim2.new(1, -20, 0, 20)
+camDistLbl.Position = UDim2.new(0, 10, 0, 110)
+camDistLbl.BackgroundTransparency = 1
+camDistLbl.Text = "Камера: Стандарт"
+camDistLbl.TextColor3 = Color3.fromRGB(200, 200, 200)
+camDistLbl.Font = Enum.Font.GothamBold
+camDistLbl.TextSize = 11
+camDistLbl.TextXAlignment = Enum.TextXAlignment.Left
+camDistLbl.Parent = container
+
+local camFarBtn = Instance.new("TextButton")
+camFarBtn.Size = UDim2.new(0.48, 0, 0, 35)
+camFarBtn.Position = UDim2.new(0, 10, 0, 135)
+camFarBtn.BackgroundColor3 = Color3.fromRGB(52, 152, 219)
+camFarBtn.Text = "🔭 ДАЛЕКО"
+camFarBtn.TextColor3 = Color3.new(1,1,1)
+camFarBtn.Font = Enum.Font.GothamBold
+camFarBtn.TextSize = 11
+camFarBtn.Parent = container
+Instance.new("UICorner", camFarBtn).CornerRadius = UDim.new(0, 6)
+
+local camCloseBtn = Instance.new("TextButton")
+camCloseBtn.Size = UDim2.new(0.48, 0, 0, 35)
+camCloseBtn.Position = UDim2.new(0.52, 0, 0, 135)
+camCloseBtn.BackgroundColor3 = Color3.fromRGB(52, 152, 219)
+camCloseBtn.Text = "👁 БЛИЗКО"
+camCloseBtn.TextColor3 = Color3.new(1,1,1)
+camCloseBtn.Font = Enum.Font.GothamBold
+camCloseBtn.TextSize = 11
+camCloseBtn.Parent = container
+Instance.new("UICorner", camCloseBtn).CornerRadius = UDim.new(0, 6)
+
+local resetBtn = Instance.new("TextButton")
+resetBtn.Size = UDim2.new(1, -20, 0, 35)
+resetBtn.Position = UDim2.new(0, 10, 0, 180)
+resetBtn.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+resetBtn.Text = "🔄 СБРОСИТЬ ВСЁ"
+resetBtn.TextColor3 = Color3.new(1,1,1)
+resetBtn.Font = Enum.Font.GothamBold
+resetBtn.TextSize = 12
+resetBtn.Parent = container
+Instance.new("UICorner", resetBtn).CornerRadius = UDim.new(0, 6)
+
+local isMegaActive = false
+local origSizes = {} 
+local origTransparency = {}
+local MEGA_HEAD_SIZE = 30   
+local MEGA_BODY_SIZE = 15   
+
+local originalFOV = Camera.FieldOfView
+local originalMaxZoom = LP.CameraMaxZoomDistance
+local originalMinZoom = LP.CameraMinZoomDistance
+
+local function updateFOV(value)
+    local fov = math.clamp(value, 20, 120)
+    Camera.FieldOfView = fov
+    fovLbl.Text = "Приближение (FOV): " .. math.floor(fov)
+    local ratio = (fov - 20) / 100
+    fovFill.Size = UDim2.new(ratio, 0, 1, 0)
+    fovKnob.Position = UDim2.new(ratio, -9, 0.5, -9)
+end
+
+local draggingSlider = false
+local function onSliderInput(input)
+    local ratio = math.clamp((input.Position.X - fovSlider.AbsolutePosition.X) / fovSlider.AbsoluteSize.X, 0, 1)
+    local fov = 20 + (ratio * 100)
+    updateFOV(fov)
+end
+
+fovSlider.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+        draggingSlider = true
+        onSliderInput(input)
+    end
+end)
+UserInputService.InputChanged:Connect(function(input)
+    if draggingSlider and (input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseMovement) then
+        onSliderInput(input)
+    end
+end)
+UserInputService.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+        draggingSlider = false
+    end
+end)
+
+camFarBtn.MouseButton1Click:Connect(function()
+    LP.CameraMaxZoomDistance = 100
+    LP.CameraMinZoomDistance = 100
+    camDistLbl.Text = "Камера: 100 (Отдалено)"
+end)
+
+camCloseBtn.MouseButton1Click:Connect(function()
+    LP.CameraMaxZoomDistance = 0.5
+    LP.CameraMinZoomDistance = 0.5
+    camDistLbl.Text = "Камера: 0.5 (От 1-го лица)"
+end)
+
+resetBtn.MouseButton1Click:Connect(function()
+    Camera.FieldOfView = originalFOV
+    LP.CameraMaxZoomDistance = originalMaxZoom
+    LP.CameraMinZoomDistance = originalMinZoom
+    updateFOV(originalFOV)
+    camDistLbl.Text = "Камера: Стандарт"
+    
+    if isMegaActive then
+        isMegaActive = false
+        hitboxBtn.Text = "🔥 ОГРОМНЫЕ ГОЛОВЫ: ВЫКЛ"
+        hitboxBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+        for part, size in pairs(origSizes) do
+            if part and part.Parent then
+                pcall(function()
+                    part.Size = size
+                    part.Transparency = origTransparency[part] or 0
+                    part.CanCollide = true
+                end)
+            end
+        end
+        origSizes = {}
+        origTransparency = {}
+    end
+end)
+
+hitboxBtn.MouseButton1Click:Connect(function()
+    isMegaActive = not isMegaActive
+    if isMegaActive then
+        hitboxBtn.Text = "💀 ОГРОМНЫЕ ГОЛОВЫ: ВКЛ"
+        hitboxBtn.BackgroundColor3 = Color3.fromRGB(0, 200, 0)
+    else
+        hitboxBtn.Text = "🔥 ОГРОМНЫЕ ГОЛОВЫ: ВЫКЛ"
+        hitboxBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+        for part, size in pairs(origSizes) do
+            if part and part.Parent then
+                pcall(function()
+                    part.Size = size
+                    part.Transparency = origTransparency[part] or 0
+                    part.CanCollide = true
+                end)
+            end
+        end
+        origSizes = {}
+        origTransparency = {}
+    end
+end)
+
+RunService.Heartbeat:Connect(function()
+    if isMegaActive then
+        for _, plr in ipairs(Players:GetPlayers()) do
+            if plr ~= LP and plr.Character then
+                for _, part in ipairs(plr.Character:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        if not origSizes[part] then
+                            origSizes[part] = part.Size
+                            origTransparency[part] = part.Transparency
+                        end
+                        local isHead = (part.Name == "Head")
+                        local targetSize = isHead and MEGA_HEAD_SIZE or MEGA_BODY_SIZE
+                        if part.Size ~= Vector3.new(targetSize, targetSize, targetSize) then
+                            pcall(function()
+                                part.Size = Vector3.new(targetSize, targetSize, targetSize)
+                                part.Transparency = 0.4
+                                part.Color = Color3.fromRGB(255, 50, 50)
+                                part.Material = Enum.Material.Neon
+                                part.CanCollide = false
+                            end)
+                        end
+                    end
+                end
+            end
+        end
+    end
+end)
+
+local isCollapsed = false
+collapseBtn.MouseButton1Click:Connect(function()
+    isCollapsed = not isCollapsed
+    if isCollapsed then
+        container.Visible = false
+        main.Size = UDim2.new(0, 240, 0, 40)
+        collapseBtn.Text = "+"
+    else
+        container.Visible = true
+        main.Size = UDim2.new(0, 240, 0, 380)
+        collapseBtn.Text = "—"
+    end
+end)
+
+closeBtn.MouseButton1Click:Connect(function() main.Visible = false; showBtn.Visible = true end)
+showBtn.MouseButton1Click:Connect(function() main.Visible = true; showBtn.Visible = false end)
+updateFOV(originalFOV)
+        </div>
+        <button class="copy-btn" onclick="copyText('script1')">📋 Скопировать VOZMEZDIE</button>
+    </div>
+
+    <!-- СКРИПТ 2: Instant TP -->
+    <div class="script-card">
+        <div class="script-title">🚀 2. Instant TP (Телепорт к игроку)</div>
+        <div class="script-code" id="script2">
+local Players = game:GetService("Players")
+local LP = Players.LocalPlayer
+
+local sg = Instance.new("ScreenGui")
+sg.Name = "TpGui"
+sg.ResetOnSpawn = false
+sg.Parent = LP:WaitForChild("PlayerGui")
+
+local main = Instance.new("Frame")
+main.Size = UDim2.new(0, 220, 0, 250)
+main.Position = UDim2.new(0.5, -110, 0.3, 0)
+main.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
+main.BorderSizePixel = 0
+main.Active = true
+main.Draggable = true
+main.Parent = sg
+Instance.new("UICorner", main).CornerRadius = UDim.new(0, 10)
+local stroke = Instance.new("UIStroke", main)
+stroke.Color = Color3.fromRGB(52, 152, 219)
+
+local hideBtn = Instance.new("TextButton")
+hideBtn.Size = UDim2.new(0, 30, 0, 30)
+hideBtn.Position = UDim2.new(1, -35, 0, 5)
+hideBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+hideBtn.Text = "X"
+hideBtn.TextColor3 = Color3.new(1,1,1)
+hideBtn.Font = Enum.Font.GothamBold
+hideBtn.TextSize = 14
+hideBtn.Parent = main
+Instance.new("UICorner", hideBtn).CornerRadius = UDim.new(0, 6)
+
+local showBtn = Instance.new("TextButton")
+showBtn.Size = UDim2.new(0, 60, 0, 40)
+showBtn.Position = UDim2.new(0, 10, 0.3, 0)
+showBtn.BackgroundColor3 = Color3.fromRGB(52, 152, 219)
+showBtn.Text = "МЕНЮ"
+showBtn.TextColor3 = Color3.new(1,1,1)
+showBtn.Font = Enum.Font.GothamBold
+showBtn.TextSize = 12
+showBtn.Visible = false
+showBtn.Parent = sg
+Instance.new("UICorner", showBtn).CornerRadius = UDim.new(0, 8)
+
+hideBtn.MouseButton1Click:Connect(function()
+    main.Visible = false
+    showBtn.Visible = true
+end)
+showBtn.MouseButton1Click:Connect(function()
+    main.Visible = true
+    showBtn.Visible = false
+end)
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, -40, 0, 30)
+title.BackgroundTransparency = 1
+title.Text = "TELEPORT"
+title.TextColor3 = Color3.fromRGB(52, 152, 219)
+title.Font = Enum.Font.GothamBold
+title.TextSize = 14
+title.TextXAlignment = Enum.TextXAlignment.Left
+title.Parent = main
+
+local targetLbl = Instance.new("TextLabel")
+targetLbl.Size = UDim2.new(1, -20, 0, 20)
+targetLbl.Position = UDim2.new(0, 10, 0, 35)
+targetLbl.BackgroundTransparency = 1
+targetLbl.Text = "Цель: Выбери игрока"
+targetLbl.TextColor3 = Color3.fromRGB(255, 255, 100)
+targetLbl.TextSize = 11
+targetLbl.TextXAlignment = Enum.TextXAlignment.Left
+targetLbl.Parent = main
+
+local scroll = Instance.new("ScrollingFrame")
+scroll.Size = UDim2.new(1, -20, 0, 110)
+scroll.Position = UDim2.new(0, 10, 0, 60)
+scroll.BackgroundColor3 = Color3.fromRGB(35, 35, 45)
+scroll.BorderSizePixel = 0
+scroll.ScrollBarThickness = 3
+scroll.Parent = main
+Instance.new("UICorner", scroll).CornerRadius = UDim.new(0, 6)
+local pLayout = Instance.new("UIListLayout")
+pLayout.Padding = UDim.new(0, 2)
+pLayout.Parent = scroll
+
+local actionBtn = Instance.new("TextButton")
+actionBtn.Size = UDim2.new(1, -20, 0, 45)
+actionBtn.Position = UDim2.new(0, 10, 0, 185)
+actionBtn.BackgroundColor3 = Color3.fromRGB(52, 152, 219)
+actionBtn.Text = "🚀 ТЕЛЕПОРТ К ИГРОКУ"
+actionBtn.TextColor3 = Color3.new(1,1,1)
+actionBtn.Font = Enum.Font.GothamBold
+actionBtn.TextSize = 13
+actionBtn.Parent = main
+Instance.new("UICorner", actionBtn).CornerRadius = UDim.new(0, 8)
+
+local selectedTarget = nil
+
+local function refreshPlayers()
+    for _, child in ipairs(scroll:GetChildren()) do
+        if child:IsA("TextButton") then child:Destroy() end
+    end
+    for _, plr in ipairs(Players:GetPlayers()) do
+        if plr ~= LP then
+            local btn = Instance.new("TextButton")
+            btn.Size = UDim2.new(1, 0, 0, 26)
+            btn.BackgroundColor3 = Color3.fromRGB(50, 50, 60)
+            btn.Text = plr.Name
+            btn.TextColor3 = Color3.fromRGB(200, 200, 200)
+            btn.TextSize = 11
+            btn.Parent = scroll
+            Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 4)
+
+            btn.MouseButton1Click:Connect(function()
+                selectedTarget = plr
+                targetLbl.Text = "Цель: " .. plr.Name
+                for _, other in ipairs(scroll:GetChildren()) do
+                    if other:IsA("TextButton") then other.BackgroundColor3 = Color3.fromRGB(50, 50, 60) end
+                end
+                btn.BackgroundColor3 = Color3.fromRGB(52, 152, 219)
+            end)
+        end
+    end
+    scroll.CanvasSize = UDim2.new(0, 0, 0, pLayout.AbsoluteContentSize.Y)
+end
+
+actionBtn.MouseButton1Click:Connect(function()
+    if not selectedTarget or not selectedTarget.Character then
+        targetLbl.Text = "СНАЧАЛА ВЫБЕРИ ИГРОКА!"
+        targetLbl.TextColor3 = Color3.fromRGB(255, 50, 50)
+        return
+    end
+    
+    local myChar = LP.Character
+    local targetChar = selectedTarget.Character
+    local myHrp = myChar and myChar:FindFirstChild("HumanoidRootPart")
+    local targetHrp = targetChar:FindFirstChild("HumanoidRootPart")
+    
+    if myHrp and targetHrp then
+        targetLbl.TextColor3 = Color3.fromRGB(255, 255, 100)
+        targetLbl.Text = "Телепорт к " .. selectedTarget.Name
+        pcall(function()
+            myHrp.CFrame = targetHrp.CFrame * CFrame.new(0, 0, -6)
+        end)
+    end
+end)
+
+LP.CharacterAdded:Connect(function()
+    selectedTarget = nil
+    task.wait(1)
+    targetLbl.Text = "Цель: Выбери игрока"
+    refreshPlayers()
+end)
+
+Players.PlayerAdded:Connect(refreshPlayers)
+Players.PlayerRemoving:Connect(function() task.wait(0.5) refreshPlayers() end)
+refreshPlayers()
+        </div>
+        <button class="copy-btn" onclick="copyText('script2')">📋 Скопировать TP</button>
+    </div>
+
+    <!-- СКРИПТ 3: ESP + AIM -->
+    <div class="script-card">
+        <div class="script-title">🎯 3. ESP + AIM + God Mode</div>
+        <div class="script-code" id="script3">
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Workspace = game:GetService("Workspace")
+local Camera = Workspace.CurrentCamera
+local LP = Players.LocalPlayer
+
+local state = { esp = false, aim = false, god = false, aimFOV = 300, aimSmooth = 0.5 }
+
+local sg = Instance.new("ScreenGui")
+sg.Name = "EspAimGui"
+sg.ResetOnSpawn = false
+sg.Parent = LP:WaitForChild("PlayerGui")
+
+local main = Instance.new("Frame")
+main.Size = UDim2.new(0, 200, 0, 200)
+main.Position = UDim2.new(0.5, -100, 0.3, 0)
+main.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
+main.BorderSizePixel = 0
+main.Active = true
+main.Draggable = true
+main.Parent = sg
+Instance.new("UICorner", main).CornerRadius = UDim.new(0, 10)
+local stroke = Instance.new("UIStroke", main)
+stroke.Color = Color3.fromRGB(155, 89, 182)
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 30)
+title.BackgroundTransparency = 1
+title.Text = "ESP + AIM"
+title.TextColor3 = Color3.fromRGB(155, 89, 182)
+title.Font = Enum.Font.GothamBold
+title.TextSize = 14
+title.Parent = main
+
+local function makeBtn(y, text, color)
+    local b = Instance.new("TextButton")
+    b.Size = UDim2.new(1, -20, 0, 40)
+    b.Position = UDim2.new(0, 10, 0, y)
+    b.BackgroundColor3 = color
+    b.Text = text
+    b.TextColor3 = Color3.new(1,1,1)
+    b.Font = Enum.Font.GothamBold
+    b.TextSize = 12
+    b.Parent = main
+    Instance.new("UICorner", b).CornerRadius = UDim.new(0, 6)
+    return b
+end
+
+local espBtn = makeBtn(40, "👁 ESP: ВЫКЛ", Color3.fromRGB(50, 200, 100))
+local aimBtn = makeBtn(90, "🎯 AIM: ВЫКЛ", Color3.fromRGB(155, 89, 182))
+local godBtn = makeBtn(140, "🛡 GOD: ВЫКЛ", Color3.fromRGB(52, 73, 94))
+
+local espData = {}
+local function createESP(plr)
+    if plr == LP or espData[plr] then return end
+    local char = plr.Character
+    if not char then return end
+    local hrp = char:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+    local hl = Instance.new("Highlight")
+    hl.FillColor = Color3.fromRGB(255, 60, 60)
+    hl.FillTransparency = 0.7
+    hl.OutlineColor = Color3.fromRGB(255, 0, 0)
+    hl.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    hl.Parent = char
+    local bb = Instance.new("BillboardGui")
+    bb.Size = UDim2.new(0, 180, 0, 50)
+    bb.StudsOffset = Vector3.new(0, 3.5, 0)
+    bb.AlwaysOnTop = true
+    bb.Parent = hrp
+    local nameLbl = Instance.new("TextLabel")
+    nameLbl.Size = UDim2.new(1, 0, 0.5, 0)
+    nameLbl.BackgroundTransparency = 1
+    nameLbl.TextColor3 = Color3.new(1,1,1)
+    nameLbl.TextStrokeTransparency = 0
+    nameLbl.TextSize = 14
+    nameLbl.Font = Enum.Font.GothamBold
+    nameLbl.Text = plr.Name
+    nameLbl.Parent = bb
+    espData[plr] = { hl = hl, bb = bb }
+end
+
+local function removeESP(plr)
+    if espData[plr] then
+        if espData[plr].hl then espData[plr].hl:Destroy() end
+        if espData[plr].bb then espData[plr].bb:Destroy() end
+        espData[plr] = nil
+    end
+end
+
+RunService.RenderStepped:Connect(function()
+    if state.aim then
+        local closest, minDist = nil, state.aimFOV
+        local center = Vector2.new(Camera.ViewportSize.X/2, Camera.ViewportSize.Y/2)
+        for _, plr in ipairs(Players:GetPlayers()) do
+            if plr ~= LP and plr.Character then
+                local head = plr.Character:FindFirstChild("Head")
+                local hum = plr.Character:FindFirstChildOfClass("Humanoid")
+                if head and hum and hum.Health > 0 then
+                    local sp, onScreen = Camera:WorldToViewportPoint(head.Position)
+                    if onScreen and sp.Z > 0 then
+                        local d = (Vector2.new(sp.X, sp.Y) - center).Magnitude
+                        if d < minDist then
+                            minDist = d
+                            closest = head
+                        end
+                    end
+                end
+            end
+        end
+        if closest then
+            local targetCF = CFrame.new(Camera.CFrame.Position, closest.Position)
+            Camera.CFrame = Camera.CFrame:Lerp(targetCF, state.aimSmooth)
+        end
+    end
+end)
+
+RunService.Heartbeat:Connect(function()
+    if state.god then
+        local char = LP.Character
+        if char then
+            local hum = char:FindFirstChildOfClass("Humanoid")
+            if hum then
+                hum.MaxHealth = 1e6
+                hum.Health = 1e6
+            end
+        end
+    end
+end)
+
+espBtn.MouseButton1Click:Connect(function()
+    state.esp = not state.esp
+    espBtn.Text = "👁 ESP: " .. (state.esp and "ВКЛ" or "ВЫКЛ")
+    espBtn.BackgroundColor3 = state.esp and Color3.fromRGB(200, 50, 50) or Color3.fromRGB(50, 200, 100)
+    if state.esp then
+        for _, plr in ipairs(Players:GetPlayers()) do if plr ~= LP then createESP(plr) end end
+    else
+        for plr, _ in pairs(espData) do removeESP(plr) end
+    end
+end)
+
+aimBtn.MouseButton1Click:Connect(function()
+    state.aim = not state.aim
+    aimBtn.Text = "🎯 AIM: " .. (state.aim and "ВКЛ" or "ВЫКЛ")
+    aimBtn.BackgroundColor3 = state.aim and Color3.fromRGB(231, 76, 60) or Color3.fromRGB(155, 89, 182)
+end)
+
+godBtn.MouseButton1Click:Connect(function()
+    state.god = not state.god
+    godBtn.Text = "🛡 GOD: " .. (state.god and "ВКЛ" or "ВЫКЛ")
+    godBtn.BackgroundColor3 = state.god and Color3.fromRGB(200, 50, 50) or Color3.fromRGB(52, 73, 94)
+end)
+
+local function onCharAdded(plr)
+    plr.CharacterAdded:Connect(function() task.wait(1); if state.esp then createESP(plr) end end)
+end
+Players.PlayerAdded:Connect(onCharAdded)
+for _, plr in ipairs(Players:GetPlayers()) do if plr ~= LP then onCharAdded(plr) end end
+Players.PlayerRemoving:Connect(function(plr) removeESP(plr) end)
+        </div>
+        <button class="copy-btn" onclick="copyText('script3')">📋 Скопировать ESP + AIM</button>
+    </div>
+
+    <script>
+        function copyText(elementId) {
+            var text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                alert('✅ Скрипт успешно скопирован! Вставляй в экзекутор.');
+            }, function(err) {
+                alert('❌ Ошибка копирования. Выдели текст вручную.');
+            });
+        }
+    </script>
+
+</body>
+  </html>
