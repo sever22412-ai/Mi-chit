@@ -2,76 +2,287 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой Cheat Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VOZMEZDIE HUB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #050505;
+            --glass-bg: rgba(20, 20, 25, 0.6);
+            --neon-cyan: #00f3ff;
+            --neon-red: #ff003c;
+            --neon-green: #00ff66;
+            --text-main: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         body {
-            background-color: #121212;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Fira Code', monospace;
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(255, 0, 60, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(0, 243, 255, 0.08), transparent 25%);
+            background-attachment: fixed;
+        }
+
+        /* Красивый фон-сетка */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.25) 50%), linear-gradient(90deg, rgba(255,0,0,0.06), rgba(0,255,0,0.02), rgba(0,0,255,0.06));
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        /* Шапка */
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.5),
+                0 0 20px var(--neon-red),
+                0 0 40px var(--neon-red);
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            from { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px var(--neon-red), 0 0 40px var(--neon-red); }
+            to { text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px var(--neon-red), 0 0 60px var(--neon-red); }
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* Контейнер */
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            padding-bottom: 50px;
+        }
+
+        /* Карточки (Glassmorphism) */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--neon-cyan);
+            border-radius: 15px 0 0 15px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 243, 255, 0.2);
+            border-color: rgba(0, 243, 255, 0.4);
+        }
+
+        .card.red::before { background: var(--neon-red); }
+        .card.red:hover { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 0, 60, 0.2); border-color: rgba(255, 0, 60, 0.4); }
+        
+        .card.green::before { background: var(--neon-green); }
+        .card.green:hover { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 255, 102, 0.2); border-color: rgba(0, 255, 102, 0.4); }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        /* Блок с кодом */
+        .code-container {
+            position: relative;
+            background: #000;
+            border-radius: 10px;
+            border: 1px solid #222;
+            margin-bottom: 15px;
+            max-height: 180px;
+            overflow: hidden;
+        }
+
+        pre {
             margin: 0;
             padding: 15px;
-        }
-        h1 {
-            text-align: center;
-            color: #00ffcc;
-            text-shadow: 0 0 10px #00ffcc;
-        }
-        .script-card {
-            background-color: #1e1e1e;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #333;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-        .script-title {
-            font-size: 16px;
-            margin-bottom: 10px;
-            color: #ffcc00;
-            font-weight: bold;
-        }
-        .script-code {
-            background-color: #0a0a0a;
-            padding: 10px;
-            border-radius: 5px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 11px;
-            color: #00ffcc;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            max-height: 180px;
+            font-size: 0.75rem;
+            color: #00ff66; /* Зеленый терминал */
+            overflow-x: auto;
             overflow-y: auto;
-            border: 1px solid #222;
+            height: 100%;
+            max-height: 180px;
+            white-space: pre-wrap;
+            word-break: break-all;
         }
+
+        pre::-webkit-scrollbar { width: 5px; height: 5px; }
+        pre::-webkit-scrollbar-track { background: #111; }
+        pre::-webkit-scrollbar-thumb { background: #333; border-radius: 5px; }
+
+        /* Градиент затухания снизу кода */
+        .code-fade {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 30px;
+            background: linear-gradient(to bottom, transparent, #000);
+            pointer-events: none;
+        }
+
+        /* Кнопки */
         .copy-btn {
-            background-color: #00cc66;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            margin-top: 15px;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
             width: 100%;
-            transition: 0.2s;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
         }
-        .copy-btn:active {
-            background-color: #00994d;
-            transform: scale(0.98);
+
+        .copy-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(45deg);
+            transition: 0.5s;
+            opacity: 0;
+        }
+
+        .copy-btn:hover::after {
+            opacity: 1;
+            left: 100%;
+        }
+
+        .copy-btn.cyan-btn {
+            background: linear-gradient(135deg, #005f73, #0a9396);
+            box-shadow: 0 4px 15px rgba(10, 147, 150, 0.4);
+        }
+        .copy-btn.cyan-btn:active { transform: scale(0.97); }
+
+        .copy-btn.red-btn {
+            background: linear-gradient(135deg, #800020, #ff003c);
+            box-shadow: 0 4px 15px rgba(255, 0, 60, 0.4);
+        }
+        .copy-btn.red-btn:active { transform: scale(0.97); }
+
+        .copy-btn.green-btn {
+            background: linear-gradient(135deg, #1b4332, #00ff66);
+            box-shadow: 0 4px 15px rgba(0, 255, 102, 0.4);
+            color: #000;
+        }
+        .copy-btn.green-btn:active { transform: scale(0.97); }
+
+        /* Всплывающее уведомление (Toast) */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: rgba(20, 20, 25, 0.9);
+            color: var(--neon-green);
+            text-align: center;
+            border-radius: 10px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%) translateY(100px);
+            font-size: 0.9rem;
+            font-family: 'Fira Code', monospace;
+            border: 1px solid var(--neon-green);
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.4);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), visibility 0.4s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #toast.show {
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
         }
     </style>
 </head>
 <body>
 
-    <h1>☠️ VOZMEZDIE HUB ☠️</h1>
+    <header>
+        <h1>☠️ VOZMEZDIE HUB ☠️</h1>
+        <div class="subtitle">by sever22412-ai</div>
+    </header>
 
-    <!-- СКРИПТ 1: VOZMEZDIE (Mega Hitbox + Zoom) -->
-    <div class="script-card">
-        <div class="script-title">🔥 1. VOZMEZDIE (Огромные головы + Зум)</div>
-        <div class="script-code" id="script1">
--- ☠️ VOZMEZDIE ☠️ (Mega Hitbox + Zoom/FOV Combo)
+    <div class="container" id="scripts-container">
+        <!-- Сюда JS будет вставлять карточки -->
+    </div>
+
+    <!-- Всплывающее окно -->
+    <div id="toast">✅ Скрипт скопирован!</div>
+
+    <script>
+        // Твои скрипты
+        const scripts = [
+            {
+                id: "voz",
+                title: "☠️ VOZMEZDIE",
+                desc: "Мега-хитбоксы (Огромные головы) + Снайперский зум (FOV)",
+                colorClass: "red",
+                btnClass: "red-btn",
+                code: `-- ☠️ VOZMEZDIE ☠️ (Mega Hitbox + Zoom/FOV Combo)
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
@@ -384,16 +595,15 @@ end)
 
 closeBtn.MouseButton1Click:Connect(function() main.Visible = false; showBtn.Visible = true end)
 showBtn.MouseButton1Click:Connect(function() main.Visible = true; showBtn.Visible = false end)
-updateFOV(originalFOV)
-        </div>
-        <button class="copy-btn" onclick="copyText('script1')">📋 Скопировать VOZMEZDIE</button>
-    </div>
-
-    <!-- СКРИПТ 2: Instant TP -->
-    <div class="script-card">
-        <div class="script-title">🚀 2. Instant TP (Телепорт к игроку)</div>
-        <div class="script-code" id="script2">
-local Players = game:GetService("Players")
+updateFOV(originalFOV)`
+            },
+            {
+                id: "tp",
+                title: "🚀 Instant TP",
+                desc: "Мгновенный телепорт к выбранному игроку",
+                colorClass: "cyan",
+                btnClass: "cyan-btn",
+                code: `local Players = game:GetService("Players")
 local LP = Players.LocalPlayer
 
 local sg = Instance.new("ScreenGui")
@@ -548,16 +758,15 @@ end)
 
 Players.PlayerAdded:Connect(refreshPlayers)
 Players.PlayerRemoving:Connect(function() task.wait(0.5) refreshPlayers() end)
-refreshPlayers()
-        </div>
-        <button class="copy-btn" onclick="copyText('script2')">📋 Скопировать TP</button>
-    </div>
-
-    <!-- СКРИПТ 3: ESP + AIM -->
-    <div class="script-card">
-        <div class="script-title">🎯 3. ESP + AIM + God Mode</div>
-        <div class="script-code" id="script3">
-local Players = game:GetService("Players")
+refreshPlayers()`
+            },
+            {
+                id: "esp",
+                title: "🎯 ESP + AIM + God Mode",
+                desc: "Видеть врагов сквозь стены, автонаведение и бессмертие",
+                colorClass: "green",
+                btnClass: "green-btn",
+                code: `local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local Workspace = game:GetService("Workspace")
 local Camera = Workspace.CurrentCamera
@@ -715,21 +924,62 @@ local function onCharAdded(plr)
 end
 Players.PlayerAdded:Connect(onCharAdded)
 for _, plr in ipairs(Players:GetPlayers()) do if plr ~= LP then onCharAdded(plr) end end
-Players.PlayerRemoving:Connect(function(plr) removeESP(plr) end)
-        </div>
-        <button class="copy-btn" onclick="copyText('script3')">📋 Скопировать ESP + AIM</button>
-    </div>
+Players.PlayerRemoving:Connect(function(plr) removeESP(plr) end)`
+            }
+        ];
 
-    <script>
-        function copyText(elementId) {
-            var text = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(text).then(function() {
-                alert('✅ Скрипт успешно скопирован! Вставляй в экзекутор.');
-            }, function(err) {
-                alert('❌ Ошибка копирования. Выдели текст вручную.');
+        // Функция для создания карточек на странице
+        const container = document.getElementById('scripts-container');
+
+        scripts.forEach(script => {
+            const card = document.createElement('div');
+            card.className = `card ${script.colorClass}`;
+
+            card.innerHTML = `
+                <div class="card-header">
+                    <div class="card-title">${script.title}</div>
+                </div>
+                <div style="font-size: 0.8rem; color: #aaa; margin-bottom: 15px;">${script.desc}</div>
+                <div class="code-container">
+                    <pre><code id="code-${script.id}"></code></pre>
+                    <div class="code-fade"></div>
+                </div>
+                <button class="copy-btn ${script.btnClass}" onclick="copyCode('${script.id}')">
+                    📋 Скопировать скрипт
+                </button>
+            `;
+
+            container.appendChild(card);
+            
+            // Вставляем код через textContent, чтобы HTML-теги внутри Lua не ломали страницу
+            document.getElementById(`code-${script.id}`).textContent = script.code;
+        });
+
+        // Функция копирования
+        function copyCode(id) {
+            const codeElement = document.getElementById(`code-${id}`);
+            const textToCopy = codeElement.textContent;
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showToast();
+            }).catch(err => {
+                // Фоллбэк для старых браузеров
+                const textArea = document.createElement("textarea");
+                textArea.value = textToCopy;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast();
             });
         }
-    </script>
 
+        // Красивое всплывающее уведомление
+        function showToast() {
+            const toast = document.getElementById("toast");
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    </script>
 </body>
-  </html>
+    </html>
