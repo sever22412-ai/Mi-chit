@@ -17,7 +17,12 @@
             --text-main: #e0e0e0;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body {
             background-color: var(--bg-color);
@@ -45,7 +50,11 @@
             opacity: 0.6;
         }
 
-        header { text-align: center; padding: 40px 20px 20px; }
+        /* Шапка */
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
 
         h1 {
             font-family: 'Orbitron', sans-serif;
@@ -54,7 +63,10 @@
             color: #fff;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px var(--neon-red), 0 0 40px var(--neon-red);
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.5),
+                0 0 20px var(--neon-red),
+                0 0 40px var(--neon-red);
             animation: pulseGlow 2s infinite alternate;
         }
 
@@ -63,77 +75,163 @@
             to { text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px var(--neon-red), 0 0 60px var(--neon-red); }
         }
 
-        .subtitle { font-size: 0.85rem; color: #888; margin-top: 10px; letter-spacing: 1px; }
-
-        .container {
-            padding: 20px; max-width: 800px; margin: 0 auto;
-            display: flex; flex-direction: column; gap: 25px; padding-bottom: 30px; flex: 1;
+        .subtitle {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 10px;
+            letter-spacing: 1px;
         }
 
+        /* Контейнер */
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            padding-bottom: 30px;
+            flex: 1;
+        }
+
+        /* Карточки (Glassmorphism) */
         .card {
             background: var(--glass-bg);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px; padding: 20px;
+            border-radius: 15px;
+            padding: 20px;
             position: relative;
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             overflow: hidden;
         }
 
         .card::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-            background: var(--neon-cyan); border-radius: 15px 0 0 15px; transition: 0.3s;
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--neon-cyan);
+            border-radius: 15px 0 0 15px;
+            transition: 0.3s;
         }
 
         .card:hover { transform: translateY(-5px); }
 
+        /* Цвета карточек */
         .card.red::before { background: var(--neon-red); }
         .card.red:hover { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 0, 60, 0.2); border-color: rgba(255, 0, 60, 0.4); }
+        
         .card.cyan::before { background: var(--neon-cyan); }
         .card.cyan:hover { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 243, 255, 0.2); border-color: rgba(0, 243, 255, 0.4); }
+
         .card.green::before { background: var(--neon-green); }
         .card.green:hover { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 255, 102, 0.2); border-color: rgba(0, 255, 102, 0.4); }
+
         .card.purple::before { background: var(--neon-purple); }
         .card.purple:hover { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(176, 38, 255, 0.2); border-color: rgba(176, 38, 255, 0.4); }
+
         .card.orange::before { background: var(--neon-orange); }
         .card.orange:hover { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 153, 0, 0.2); border-color: rgba(255, 153, 0, 0.4); }
 
-        .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
-        .card-title { font-size: 1.1rem; color: #fff; font-weight: bold; text-shadow: 0 0 10px rgba(255,255,255,0.3); display: flex; align-items: center; gap: 10px; }
-
-        .icon-box {
-            display: inline-flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px; width: 35px; height: 35px; font-size: 1.2rem; box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
         }
 
-        .code-container { position: relative; background: #000; border-radius: 10px; border: 1px solid #222; margin-bottom: 15px; max-height: 180px; overflow: hidden; }
+        .card-title {
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Иконки для карточек */
+        .icon-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            width: 35px;
+            height: 35px;
+            font-size: 1.2rem;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
+        }
+
+        /* Блок с кодом */
+        .code-container {
+            position: relative;
+            background: #000;
+            border-radius: 10px;
+            border: 1px solid #222;
+            margin-bottom: 15px;
+            max-height: 180px;
+            overflow: hidden;
+        }
 
         pre {
-            margin: 0; padding: 15px; font-size: 0.75rem; color: #00ff66;
-            overflow-x: auto; overflow-y: auto; height: 100%; max-height: 180px;
-            white-space: pre-wrap; word-break: break-all;
+            margin: 0;
+            padding: 15px;
+            font-size: 0.75rem;
+            color: #00ff66;
+            overflow-x: auto;
+            overflow-y: auto;
+            height: 100%;
+            max-height: 180px;
+            white-space: pre-wrap;
+            word-break: break-all;
         }
 
         pre::-webkit-scrollbar { width: 5px; height: 5px; }
         pre::-webkit-scrollbar-track { background: #111; }
         pre::-webkit-scrollbar-thumb { background: #333; border-radius: 5px; }
 
-        .code-fade { position: absolute; bottom: 0; left: 0; width: 100%; height: 30px; background: linear-gradient(to bottom, transparent, #000); pointer-events: none; }
+        .code-fade {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 30px;
+            background: linear-gradient(to bottom, transparent, #000);
+            pointer-events: none;
+        }
 
+        /* Кнопки */
         .copy-btn {
-            width: 100%; padding: 15px; border: none; border-radius: 10px;
-            font-family: 'Orbitron', sans-serif; font-weight: bold; font-size: 1rem;
-            text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
-            transition: all 0.2s; color: #fff; display: flex; align-items: center; justify-content: center;
-            gap: 10px; position: relative; overflow: hidden;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
         }
 
         .copy-btn::after {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
             background: linear-gradient(transparent, rgba(255,255,255,0.2), transparent);
-            transform: rotate(45deg); transition: 0.5s; opacity: 0;
+            transform: rotate(45deg);
+            transition: 0.5s;
+            opacity: 0;
         }
+
         .copy-btn:hover::after { opacity: 1; left: 100%; }
 
         .copy-btn.cyan-btn { background: linear-gradient(135deg, #005f73, #0a9396); box-shadow: 0 4px 15px rgba(10, 147, 150, 0.4); }
@@ -143,52 +241,142 @@
         .copy-btn.orange-btn { background: linear-gradient(135deg, #8a4f00, #ff9900); box-shadow: 0 4px 15px rgba(255, 153, 0, 0.4); color: #000; }
         .copy-btn:active { transform: scale(0.97); }
 
+        /* Футер (Подвал сайта) */
         footer {
-            margin-top: auto; padding: 30px 20px; text-align: center;
+            margin-top: auto;
+            padding: 30px 20px;
+            text-align: center;
             background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
             border-top: 1px solid rgba(176, 38, 255, 0.3);
-            position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        footer::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--neon-purple), transparent); box-shadow: 0 0 10px var(--neon-purple); }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+            box-shadow: 0 0 10px var(--neon-purple);
+        }
 
-        .meme-img { max-width: 220px; border-radius: 10px; border: 2px solid var(--neon-purple); box-shadow: 0 0 15px rgba(176, 38, 255, 0.5); margin-bottom: 20px; transition: transform 0.3s; }
+        /* Стиль для мема */
+        .meme-img {
+            max-width: 220px;
+            border-radius: 10px;
+            border: 2px solid var(--neon-purple);
+            box-shadow: 0 0 15px rgba(176, 38, 255, 0.5);
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
         .meme-img:hover { transform: scale(1.05) rotate(2deg); }
 
+        /* НОВЫЙ БЛОК ПРЕДУПРЕЖДЕНИЯ (КРАСНО-ЖЕЛТЫЙ) */
         .warning-box {
-            background: rgba(255, 153, 0, 0.08); border: 1px solid rgba(255, 153, 0, 0.4);
-            border-radius: 10px; padding: 15px; margin: 0 auto 20px auto; max-width: 500px;
-            text-align: left; font-size: 0.75rem; color: #ffcc00; box-shadow: 0 0 15px rgba(255, 153, 0, 0.15);
+            background: rgba(20, 10, 10, 0.8);
+            border: 2px solid #ff003c;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 0 auto 20px auto;
+            max-width: 500px;
+            text-align: left;
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.3), inset 0 0 15px rgba(255, 0, 60, 0.1);
         }
 
-        .warning-title { font-weight: bold; font-family: 'Orbitron', sans-serif; font-size: 0.85rem; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
-        .warning-text { color: #ccc; line-height: 1.5; }
+        .warning-title {
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #ff003c; /* Красный */
+            text-shadow: 0 0 5px #ff003c;
+        }
 
-        .credits-title { font-family: 'Orbitron', sans-serif; color: var(--neon-purple); font-size: 1.2rem; margin-bottom: 10px; text-shadow: 0 0 10px var(--neon-purple); }
-        .credits-text { font-size: 0.85rem; color: #bbb; line-height: 1.6; }
+        .warning-text {
+            color: #ffcc00; /* Желтый */
+            font-weight: bold;
+            line-height: 1.5;
+            font-size: 0.8rem;
+            text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+        }
 
+        .credits-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-purple);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        .credits-text {
+            font-size: 0.85rem;
+            color: #bbb;
+            line-height: 1.6;
+        }
+
+        /* ===== КНОПКА "НАВЕРХ" ===== */
         #scrollTopBtn {
-            display: none; position: fixed; bottom: 20px; right: 20px; z-index: 99;
-            border: 2px solid var(--neon-cyan); background: rgba(20, 20, 25, 0.9); color: var(--neon-cyan);
-            cursor: pointer; padding: 15px; border-radius: 50%; font-size: 20px; font-family: 'Orbitron', sans-serif;
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4); transition: all 0.3s; width: 55px; height: 55px;
-            align-items: center; justify-content: center;
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            border: 2px solid var(--neon-cyan);
+            background: rgba(20, 20, 25, 0.9);
+            color: var(--neon-cyan);
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 20px;
+            font-family: 'Orbitron', sans-serif;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+            transition: all 0.3s;
+            width: 55px;
+            height: 55px;
+            align-items: center;
+            justify-content: center;
         }
-        #scrollTopBtn:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 25px rgba(0, 243, 255, 0.8); }
+        #scrollTopBtn:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.8);
+        }
 
+        /* ===== МОДАЛЬНЫЕ ОКНА ===== */
         .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
-            display: flex; justify-content: center; align-items: center; z-index: 9999; opacity: 1; transition: opacity 0.3s ease;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.3s ease;
         }
 
         .modal-overlay.hidden { opacity: 0; pointer-events: none; }
 
         .modal-content {
-            background: rgba(20, 20, 25, 0.95); border: 2px solid var(--neon-cyan);
+            background: rgba(20, 20, 25, 0.95);
+            border: 2px solid var(--neon-cyan);
             box-shadow: 0 0 30px rgba(0, 243, 255, 0.3), inset 0 0 20px rgba(0, 243, 255, 0.1);
-            border-radius: 15px; padding: 25px 20px; max-width: 400px; width: 90%;
-            position: relative; text-align: left; transform: scale(1); transition: transform 0.3s ease;
+            border-radius: 15px;
+            padding: 25px 20px;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+            text-align: left;
+            transform: scale(1);
+            transition: transform 0.3s ease;
         }
         
         .modal-overlay.hidden .modal-content { transform: scale(0.9); }
@@ -200,16 +388,36 @@
         #instructionModal .modal-content::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 5px; }
 
         .close-modal {
-            position: absolute; top: -15px; right: -15px; background: #ff003c; color: white;
-            border: 2px solid #fff; border-radius: 50%; width: 35px; height: 35px;
-            font-weight: bold; font-family: 'Orbitron', sans-serif; cursor: pointer;
-            box-shadow: 0 0 10px rgba(255, 0, 60, 0.8); transition: transform 0.2s, background 0.2s;
-            display: flex; align-items: center; justify-content: center; font-size: 16px; z-index: 10;
+            position: absolute;
+            top: -15px; right: -15px;
+            background: #ff003c;
+            color: white;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            width: 35px; height: 35px;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 0, 60, 0.8);
+            transition: transform 0.2s, background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            z-index: 10;
         }
 
         .close-modal:active { transform: scale(0.8); background: #b0002a; }
 
-        .modal-title { color: var(--neon-cyan); font-family: 'Orbitron', sans-serif; font-size: 1.1rem; margin-bottom: 12px; text-shadow: 0 0 10px rgba(0, 243, 255, 0.6); text-align: center; }
+        .modal-title {
+            color: var(--neon-cyan);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
+            text-align: center;
+        }
+
         .modal-text { font-family: Arial, sans-serif; font-size: 0.9rem; color: #ddd; line-height: 1.6; }
 
         .inst-text { margin-bottom: 10px; font-weight: bold; color: #fff; }
@@ -218,17 +426,22 @@
             margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 10px;
             border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);
         }
-        .inst-img-row img { width: 90px; height: 90px; object-fit: contain; border-radius: 6px; border: 2px solid var(--neon-cyan); background-color: #fff; }
+        .inst-img-row img {
+            width: 90px; height: 90px; object-fit: contain;
+            border-radius: 6px; border: 2px solid var(--neon-cyan); background-color: #fff;
+        }
         .inst-img-row span { font-family: 'Orbitron', sans-serif; font-weight: bold; color: var(--neon-cyan); font-size: 1.2rem; }
         .inst-desc { font-size: 0.85rem; color: #bbb; margin-bottom: 15px; line-height: 1.5; }
         .inst-warn { color: var(--neon-green); font-weight: bold; }
 
+        /* Всплывающее уведомление (Toast) */
         #toast {
-            visibility: hidden; min-width: 250px; background-color: rgba(20, 20, 25, 0.9); color: var(--neon-green);
-            text-align: center; border-radius: 10px; padding: 16px; position: fixed; z-index: 1000;
-            left: 50%; bottom: 30px; transform: translateX(-50%) translateY(100px);
-            font-size: 0.9rem; font-family: 'Fira Code', monospace; border: 1px solid var(--neon-green);
-            box-shadow: 0 0 20px rgba(0, 255, 102, 0.4);
+            visibility: hidden; min-width: 250px; background-color: rgba(20, 20, 25, 0.9);
+            color: var(--neon-green); text-align: center; border-radius: 10px; padding: 16px;
+            position: fixed; z-index: 1000; left: 50%; bottom: 30px;
+            transform: translateX(-50%) translateY(100px);
+            font-size: 0.9rem; font-family: 'Fira Code', monospace;
+            border: 1px solid var(--neon-green); box-shadow: 0 0 20px rgba(0, 255, 102, 0.4);
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), visibility 0.4s;
             display: flex; align-items: center; justify-content: center; gap: 10px;
         }
@@ -238,8 +451,10 @@
 </head>
 <body>
 
+    <!-- Кнопка Наверх -->
     <button id="scrollTopBtn" onclick="scrollToTop()">▲</button>
 
+    <!-- ПЕРВОЕ ОКНО (Информация) -->
     <div id="infoModal" class="modal-overlay">
         <div class="modal-content">
             <button class="close-modal" onclick="closeInfoModal()">✕</button>
@@ -252,12 +467,15 @@
         </div>
     </div>
 
+    <!-- ВТОРОЕ ОКНО (Инструкция через 10 сек) -->
     <div id="instructionModal" class="modal-overlay hidden">
         <div class="modal-content">
             <button class="close-modal" onclick="closeInstructionModal()">✕</button>
             <div class="modal-title">📖 Инструкция</div>
+            
             <div class="modal-text">
                 <div class="inst-text">Если вы новичок и не познали азы — вот краткая инструкция:</div>
+                
                 <div class="inst-img-row">
                     <img src="https://static-sg.winudf.com/wupload/xy/aprojectadmin/Hf4bnX2v.jpg" alt="Delta">
                     <span>DELTA Экзекутер</span>
@@ -266,15 +484,20 @@
                     <img src="https://apkget.ru/pictures/roblox/injectors/arceusx.webp" alt="Arceus X">
                     <span>Arceus X Neo</span>
                 </div>
+
                 <div class="inst-desc">
                     Установите Экзекутор, смотря какое у вас устройство. Зайдите в ваш Экзекутор и получите ключ.<br><br>
                     <span class="inst-warn">Для Arceus X Neo ключ не нужен!</span><br><br>
                     Для Delta скопируйте и перейдите по ссылке, выполните задание и получите ключ.<br><br>
                     Итак, теперь вы познали первые шаги.
                 </div>
+
                 <div class="inst-text">Следующие шаги:</div>
                 <div class="inst-desc" style="margin-bottom: 5px;">Скопируйте нужный вам скрипт:</div>
-                <div class="inst-desc">Далее вставьте скрипт в редактор кода и нажмите <b>Execute</b>. Пользуйтесь!</div>
+
+                <div class="inst-desc">
+                    Далее вставьте скрипт в редактор кода и нажмите <b>Execute</b>. Пользуйтесь!
+                </div>
             </div>
         </div>
     </div>
@@ -284,16 +507,19 @@
         <div class="subtitle">by sever22412-ai</div>
     </header>
 
-    <div class="container" id="scripts-container"></div>
+    <div class="container" id="scripts-container">
+        <!-- Сюда JS будет вставлять карточки -->
+    </div>
 
+    <!-- ПОДВАЛ САЙТА (ФУТЕР) -->
     <footer>
         <img src="https://avatars.mds.yandex.net/i?id=80448eaa5dda6de3eac8ac9fcffa7beb_l-12602658-images-thumbs&n=13" alt="Meme" class="meme-img">
 
-        <!-- ИСПРАВЛЕНО ТУТ -->
+        <!-- НОВОЕ КРАСНО-ЖЕЛТОЕ ПРЕДУПРЕЖДЕНИЕ -->
         <div class="warning-box">
             <div class="warning-title">⚠️ ВАЖНОЕ УВЕДОМЛЕНИЕ</div>
             <div class="warning-text">
-                <b>Внимание:</b> Это клиентские скрипты. В некоторых плейсах функционал может не работать или работать с задержками (лагами) из-за серверной защиты игры.
+                ЭТО КЛИЕНТ-СКРИПТЫ. В НЕКОТОРЫХ ПЛЕЙСАХ (ИГРАХ) ФУНКЦИОНАЛ ИЛИ РАБОТА МОЖЕТ НЕ ФУНКЦИОНИРОВАТЬ ИЛИ РАБОТАТЬ С ЛАГАМИ.
             </div>
         </div>
 
@@ -307,6 +533,7 @@
     <div id="toast">✅ Скрипт скопирован!</div>
 
     <script>
+        // --- Логика кнопки Наверх ---
         window.onscroll = function() {
             let btn = document.getElementById("scrollTopBtn");
             if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
@@ -316,12 +543,25 @@
             }
         };
 
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-        function closeInfoModal() { document.getElementById('infoModal').classList.add('hidden'); }
-        function closeInstructionModal() { document.getElementById('instructionModal').classList.add('hidden'); }
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-        setTimeout(function() { document.getElementById('instructionModal').classList.remove('hidden'); }, 10000);
+        // --- Логика Окон ---
+        function closeInfoModal() {
+            document.getElementById('infoModal').classList.add('hidden');
+        }
 
+        function closeInstructionModal() {
+            document.getElementById('instructionModal').classList.add('hidden');
+        }
+
+        // Показываем инструкцию через 10 секунд (10000 миллисекунд)
+        setTimeout(function() {
+            document.getElementById('instructionModal').classList.remove('hidden');
+        }, 10000);
+
+        // Твои скрипты
         const scripts = [
             {
                 id: "voz",
@@ -1007,4 +1247,849 @@ Players.PlayerRemoving:Connect(function(plr) removeESP(plr) end)`
                 btnClass: "purple-btn",
                 code: `-- Arceus X Neo | COMPACT CYBERPUNK FLY + CLOSE/MINIMIZE + RESET
 local Players          = game:GetService("Players")
-local User
+local UserInputService = game:GetService("UserInputService")
+local RunService       = game:GetService("RunService")
+local Workspace        = game:GetService("Workspace")
+
+local LocalPlayer = Players.LocalPlayer
+local Camera      = Workspace.CurrentCamera
+
+local WALK_SPEED_DEFAULT = 16
+local FLY_SPEED_DEFAULT  = 70
+
+local isFlying = false
+local flySpeed = FLY_SPEED_DEFAULT
+local character, humanoid, rootPart, bodyVelocity, bodyGyro
+
+local Controls
+do
+    local ok, mod = pcall(function() return require(LocalPlayer.PlayerScripts:WaitForChild("PlayerModule")) end)
+    if ok and mod then
+        local ok2, ctrl = pcall(function() return mod:GetControls() end)
+        if ok2 then Controls = ctrl end
+    end
+end
+
+local function readMoveVector()
+    if Controls then
+        local ok, v = pcall(function() return Controls:GetMoveVector() end)
+        if ok and v then return v end
+    end
+    return Vector3.zero
+end
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "CompactCyberFlyGui"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 200, 0, 260) 
+mainFrame.Position = UDim2.new(0.5, -100, 0.5, -130)
+mainFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 15)
+mainFrame.BackgroundTransparency = 0.15
+mainFrame.BorderSizePixel = 0
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.Parent = screenGui
+
+Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 10)
+
+local stroke = Instance.new("UIStroke", mainFrame)
+stroke.Color = Color3.fromRGB(0, 243, 255)
+stroke.Thickness = 2
+stroke.Transparency = 0.2
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 30)
+title.BackgroundTransparency = 1
+title.Text = "⚡ FLY HUB ⚡"
+title.TextColor3 = Color3.fromRGB(0, 243, 255)
+title.Font = Enum.Font.GothamBlack
+title.TextSize = 14
+title.Parent = mainFrame
+
+local closeBtn = Instance.new("TextButton")
+closeBtn.Size = UDim2.new(0, 22, 0, 22)
+closeBtn.Position = UDim2.new(0, 6, 0, 4)
+closeBtn.BackgroundColor3 = Color3.fromRGB(200, 40, 40)
+closeBtn.Text = "X"
+closeBtn.TextColor3 = Color3.new(1,1,1)
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextSize = 12
+closeBtn.AutoButtonColor = false
+closeBtn.Parent = mainFrame
+Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(0, 4)
+
+local minBtn = Instance.new("TextButton")
+minBtn.Size = UDim2.new(0, 22, 0, 22)
+minBtn.Position = UDim2.new(1, -28, 0, 4)
+minBtn.BackgroundColor3 = Color3.fromRGB(240, 180, 0)
+minBtn.Text = "—"
+minBtn.TextColor3 = Color3.new(1,1,1)
+minBtn.Font = Enum.Font.GothamBold
+minBtn.TextSize = 14
+minBtn.AutoButtonColor = false
+minBtn.Parent = mainFrame
+Instance.new("UICorner", minBtn).CornerRadius = UDim.new(0, 4)
+
+local showBtn = Instance.new("TextButton")
+showBtn.Size = UDim2.new(0, 70, 0, 30)
+showBtn.Position = UDim2.new(0, 10, 0.5, 0)
+showBtn.BackgroundColor3 = Color3.fromRGB(0, 243, 255)
+showBtn.Text = "МЕНЮ"
+showBtn.TextColor3 = Color3.fromRGB(0,0,0)
+showBtn.Font = Enum.Font.GothamBlack
+showBtn.TextSize = 12
+showBtn.Visible = false
+showBtn.Parent = screenGui
+Instance.new("UICorner", showBtn).CornerRadius = UDim.new(0, 6)
+
+local divider = Instance.new("Frame")
+divider.Size = UDim2.new(0.9, 0, 0, 1)
+divider.Position = UDim2.new(0.05, 0, 0, 30)
+divider.BackgroundColor3 = Color3.fromRGB(0, 243, 255)
+divider.BorderSizePixel = 0
+divider.Parent = mainFrame
+
+local contentContainer = Instance.new("Frame")
+contentContainer.Size = UDim2.new(1, 0, 1, -30)
+contentContainer.Position = UDim2.new(0, 0, 0, 30)
+contentContainer.BackgroundTransparency = 1
+contentContainer.Parent = mainFrame
+
+local flyBtn = Instance.new("TextButton")
+flyBtn.Size = UDim2.new(0.9, 0, 0, 35)
+flyBtn.Position = UDim2.new(0.05, 0, 0, 10)
+flyBtn.BackgroundColor3 = Color3.fromRGB(20, 25, 30)
+flyBtn.Text = "🚀 FLY: ВЫКЛ"
+flyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+flyBtn.Font = Enum.Font.GothamBold
+flyBtn.TextSize = 12
+flyBtn.AutoButtonColor = false
+flyBtn.Parent = contentContainer
+Instance.new("UICorner", flyBtn).CornerRadius = UDim.new(0, 6)
+local flyStroke = Instance.new("UIStroke", flyBtn)
+flyStroke.Color = Color3.fromRGB(100, 100, 100)
+flyStroke.Thickness = 1
+
+local flySpeedLabel = Instance.new("TextLabel")
+flySpeedLabel.Size = UDim2.new(0.9, 0, 0, 15)
+flySpeedLabel.Position = UDim2.new(0.05, 0, 0, 55)
+flySpeedLabel.BackgroundTransparency = 1
+flySpeedLabel.Text = "СКОРОСТЬ ПОЛЁТА: 70"
+flySpeedLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
+flySpeedLabel.Font = Enum.Font.GothamBold
+flySpeedLabel.TextSize = 10
+flySpeedLabel.TextXAlignment = Enum.TextXAlignment.Left
+flySpeedLabel.Parent = contentContainer
+
+local flySpeedSlider = Instance.new("TextButton")
+flySpeedSlider.Size = UDim2.new(0.9, 0, 0, 6)
+flySpeedSlider.Position = UDim2.new(0.05, 0, 0, 75)
+flySpeedSlider.BackgroundColor3 = Color3.fromRGB(30, 35, 45)
+flySpeedSlider.Text = ""
+flySpeedSlider.AutoButtonColor = false
+flySpeedSlider.Parent = contentContainer
+Instance.new("UICorner", flySpeedSlider).CornerRadius = UDim.new(0, 3)
+
+local flySliderFill = Instance.new("Frame")
+flySliderFill.Size = UDim2.new(0.12, 0, 1, 0)
+flySliderFill.BackgroundColor3 = Color3.fromRGB(0, 243, 255)
+flySliderFill.BorderSizePixel = 0
+flySliderFill.Parent = flySpeedSlider
+Instance.new("UICorner", flySliderFill).CornerRadius = UDim.new(0, 3)
+
+local flySliderKnob = Instance.new("Frame")
+flySliderKnob.Size = UDim2.new(0, 14, 0, 14)
+flySliderKnob.Position = UDim2.new(0.12, -7, 0.5, -7)
+flySliderKnob.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+flySliderKnob.BorderSizePixel = 0
+flySliderKnob.Parent = flySpeedSlider
+Instance.new("UICorner", flySliderKnob).CornerRadius = UDim.new(1, 0)
+
+local walkSpeedLabel = Instance.new("TextLabel")
+walkSpeedLabel.Size = UDim2.new(0.9, 0, 0, 15)
+walkSpeedLabel.Position = UDim2.new(0.05, 0, 0, 100)
+walkSpeedLabel.BackgroundTransparency = 1
+walkSpeedLabel.Text = "СКОРОСТЬ ХОДЬБЫ: 16"
+walkSpeedLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
+walkSpeedLabel.Font = Enum.Font.GothamBold
+walkSpeedLabel.TextSize = 10
+walkSpeedLabel.TextXAlignment = Enum.TextXAlignment.Left
+walkSpeedLabel.Parent = contentContainer
+
+local walkSpeedSlider = Instance.new("TextButton")
+walkSpeedSlider.Size = UDim2.new(0.9, 0, 0, 6)
+walkSpeedSlider.Position = UDim2.new(0.05, 0, 0, 120)
+walkSpeedSlider.BackgroundColor3 = Color3.fromRGB(30, 35, 45)
+walkSpeedSlider.Text = ""
+walkSpeedSlider.AutoButtonColor = false
+walkSpeedSlider.Parent = contentContainer
+Instance.new("UICorner", walkSpeedSlider).CornerRadius = UDim.new(0, 3)
+
+local walkSliderFill = Instance.new("Frame")
+walkSliderFill.Size = UDim2.new(0.08, 0, 1, 0)
+walkSliderFill.BackgroundColor3 = Color3.fromRGB(255, 0, 60)
+walkSliderFill.BorderSizePixel = 0
+walkSliderFill.Parent = walkSpeedSlider
+Instance.new("UICorner", walkSliderFill).CornerRadius = UDim.new(0, 3)
+
+local walkSliderKnob = Instance.new("Frame")
+walkSliderKnob.Size = UDim2.new(0, 14, 0, 14)
+walkSliderKnob.Position = UDim2.new(0.08, -7, 0.5, -7)
+walkSliderKnob.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+walkSliderKnob.BorderSizePixel = 0
+walkSliderKnob.Parent = walkSpeedSlider
+Instance.new("UICorner", walkSliderKnob).CornerRadius = UDim.new(1, 0)
+
+local resetBtn = Instance.new("TextButton")
+resetBtn.Size = UDim2.new(0.9, 0, 0, 30)
+resetBtn.Position = UDim2.new(0.05, 0, 0, 145)
+resetBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 45)
+resetBtn.Text = "🔄 СБРОСИТЬ ВСЁ"
+resetBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+resetBtn.Font = Enum.Font.GothamBold
+resetBtn.TextSize = 11
+resetBtn.AutoButtonColor = false
+resetBtn.Parent = contentContainer
+Instance.new("UICorner", resetBtn).CornerRadius = UDim.new(0, 6)
+local resetStroke = Instance.new("UIStroke", resetBtn)
+resetStroke.Color = Color3.fromRGB(100, 100, 100)
+resetStroke.Thickness = 1
+
+local hintLbl = Instance.new("TextLabel")
+hintLbl.Size = UDim2.new(1, 0, 0, 20)
+hintLbl.Position = UDim2.new(0, 0, 1, -25)
+hintLbl.BackgroundTransparency = 1
+hintLbl.Text = "Джойстик = полёт | Отпустил = завис"
+hintLbl.TextColor3 = Color3.fromRGB(80, 80, 80)
+hintLbl.Font = Enum.Font.Gotham
+hintLbl.TextSize = 9
+hintLbl.Parent = contentContainer
+
+local isMinimized = false
+
+closeBtn.MouseButton1Click:Connect(function()
+    mainFrame.Visible = false
+    showBtn.Visible = true
+end)
+
+showBtn.MouseButton1Click:Connect(function()
+    mainFrame.Visible = true
+    showBtn.Visible = false
+end)
+
+minBtn.MouseButton1Click:Connect(function()
+    isMinimized = not isMinimized
+    if isMinimized then
+        contentContainer.Visible = false
+        mainFrame.Size = UDim2.new(0, 200, 0, 32)
+        minBtn.Text = "+"
+    else
+        contentContainer.Visible = true
+        mainFrame.Size = UDim2.new(0, 200, 0, 260)
+        minBtn.Text = "—"
+    end
+end)
+
+local function setupCharacter(char)
+    character = char
+    humanoid  = char:WaitForChild("Humanoid")
+    rootPart  = char:WaitForChild("HumanoidRootPart")
+end
+if LocalPlayer.Character then setupCharacter(LocalPlayer.Character) end
+LocalPlayer.CharacterAdded:Connect(setupCharacter)
+
+local function startFly()
+    if not rootPart or not humanoid then return end
+    isFlying = true
+    humanoid.PlatformStand = true
+    pcall(function() rootPart:SetNetworkOwner(LocalPlayer) end)
+
+    bodyVelocity = Instance.new("BodyVelocity")
+    bodyVelocity.MaxForce = Vector3.new(1e6, 1e6, 1e6)
+    bodyVelocity.Velocity = Vector3.zero
+    bodyVelocity.Parent = rootPart
+
+    bodyGyro = Instance.new("BodyGyro")
+    bodyGyro.MaxTorque = Vector3.new(1e6, 1e6, 1e6)
+    bodyGyro.P = 2500 
+    bodyGyro.D = 200
+    bodyGyro.Parent = rootPart
+
+    flyBtn.Text = "🔥 FLY: ВКЛ"
+    flyBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 60)
+    flyStroke.Color = Color3.fromRGB(255, 0, 60)
+end
+
+local function stopFly()
+    isFlying = false
+    if humanoid then humanoid.PlatformStand = false end
+    if bodyVelocity then bodyVelocity:Destroy(); bodyVelocity = nil end
+    if bodyGyro then bodyGyro:Destroy(); bodyGyro = nil end
+    flyBtn.Text = "🚀 FLY: ВЫКЛ"
+    flyBtn.BackgroundColor3 = Color3.fromRGB(20, 25, 30)
+    flyStroke.Color = Color3.fromRGB(100, 100, 100)
+end
+
+flyBtn.MouseButton1Click:Connect(function()
+    if isFlying then stopFly() else startFly() end
+end)
+
+RunService.Heartbeat:Connect(function()
+    if not isFlying or not bodyVelocity or not bodyGyro or not rootPart or not rootPart.Parent then return end
+
+    local camCF = Camera.CFrame
+    local lookVec = camCF.LookVector
+    local rightVec = camCF.RightVector
+    local mv = readMoveVector()
+    
+    local vel = Vector3.zero
+    vel += lookVec  * (-mv.Z)
+    vel += rightVec * mv.X
+
+    if UserInputService:IsKeyDown(Enum.KeyCode.Space)     then vel += Vector3.new(0,1,0) end
+    if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then vel -= Vector3.new(0,1,0) end
+
+    if vel.Magnitude > 0.05 then
+        bodyVelocity.Velocity = vel.Unit * flySpeed
+    else
+        bodyVelocity.Velocity = Vector3.zero
+    end
+
+    local flatLook = Vector3.new(lookVec.X, 0, lookVec.Z)
+    if flatLook.Magnitude > 0.01 then
+        bodyGyro.CFrame = CFrame.lookAt(rootPart.Position, rootPart.Position + flatLook)
+    end
+end)
+
+local function setFlySpeed(value)
+    local speed = tonumber(value)
+    if not speed then return end
+    speed = math.clamp(speed, 10, 500)
+    flySpeed = speed
+    flySpeedLabel.Text = "СКОРОСТЬ ПОЛЁТА: " .. tostring(speed)
+    local ratio = (speed - 10) / 490
+    flySliderFill.Size = UDim2.new(ratio, 0, 1, 0)
+    flySliderKnob.Position = UDim2.new(ratio, -7, 0.5, -7)
+end
+
+local function setWalkSpeed(value)
+    local speed = tonumber(value)
+    if not speed or not humanoid then return end
+    speed = math.clamp(speed, 1, 200)
+    humanoid.WalkSpeed = speed
+    walkSpeedLabel.Text = "СКОРОСТЬ ХОДЬБЫ: " .. tostring(speed)
+    local ratio = (speed - 1) / 199
+    walkSliderFill.Size = UDim2.new(ratio, 0, 1, 0)
+    walkSliderKnob.Position = UDim2.new(ratio, -7, 0.5, -7)
+end
+
+resetBtn.MouseButton1Click:Connect(function()
+    if isFlying then stopFly() end
+    setFlySpeed(FLY_SPEED_DEFAULT)
+    setWalkSpeed(WALK_SPEED_DEFAULT)
+    resetBtn.Text = "✅ СБРОШЕНО"
+    resetBtn.BackgroundColor3 = Color3.fromRGB(0, 150, 50)
+    task.wait(1)
+    resetBtn.Text = "🔄 СБРОСИТЬ ВСЁ"
+    resetBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 45)
+end)
+
+local function handleSlider(slider, knob, fill, min, max, callback)
+    local dragging = false
+    local function update(input)
+        local ratio = math.clamp((input.Position.X - slider.AbsolutePosition.X) / slider.AbsoluteSize.X, 0, 1)
+        local val = math.floor(min + ratio * (max - min))
+        callback(val)
+    end
+    slider.InputBegan:Connect(function(i)
+        if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then
+            dragging = true; update(i)
+        end
+    end)
+    slider.InputChanged:Connect(function(i)
+        if dragging and (i.UserInputType == Enum.UserInputType.MouseMovement or i.UserInputType == Enum.UserInputType.Touch) then
+            update(i)
+        end
+    end)
+    UserInputService.InputEnded:Connect(function(i)
+        if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then
+            dragging = false
+        end
+    end)
+end
+
+handleSlider(flySpeedSlider, flySliderKnob, flySliderFill, 10, 500, setFlySpeed)
+handleSlider(walkSpeedSlider, walkSliderKnob, walkSliderFill, 1, 200, setWalkSpeed)
+
+if humanoid then setWalkSpeed(WALK_SPEED_DEFAULT) end
+setFlySpeed(FLY_SPEED_DEFAULT)
+
+LocalPlayer.CharacterAdded:Connect(function(char)
+    stopFly(); setupCharacter(char); task.wait(0.5)
+    if humanoid then setWalkSpeed(WALK_SPEED_DEFAULT) end
+end)
+
+print("[Arceus] COMPACT CYBERPUNK Fly + Menu Controls loaded")`
+            },
+            {
+                id: "combo",
+                icon: "🔥",
+                title: "Combo 4X",
+                desc: "Всё в одном: Флай, Голова, Аим, ESP (4 вкладки)",
+                colorClass: "orange",
+                btnClass: "orange-btn",
+                code: `-- ☠️ Combo 4X ☠️ (Правильный FLY + BIG HEAD + AIM + ESP)
+local Players          = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local RunService       = game:GetService("RunService")
+local Workspace        = game:GetService("Workspace")
+local Camera           = Workspace.CurrentCamera
+local LP = Players.LocalPlayer
+
+local state = {
+    esp = false, aim = false, bigHead = false, fly = false,
+    aimFOV = 300, aimSmooth = 0.5, headSize = 30,
+    flySpeed = 70, walkSpeed = 16
+}
+local WALK_SPEED_DEFAULT = 16
+local FLY_SPEED_DEFAULT  = 70
+
+local character, humanoid, rootPart, bodyVelocity, bodyGyro
+local Controls
+do
+    local ok, mod = pcall(function() return require(LP.PlayerScripts:WaitForChild("PlayerModule")) end)
+    if ok and mod then
+        local ok2, ctrl = pcall(function() return mod:GetControls() end)
+        if ok2 then Controls = ctrl end
+    end
+end
+local function readMoveVector()
+    if Controls then
+        local ok, v = pcall(function() return Controls:GetMoveVector() end)
+        if ok and v then return v end
+    end
+    return Vector3.zero
+end
+
+local sg = Instance.new("ScreenGui")
+sg.Name = "Combo4XGui"
+sg.ResetOnSpawn = false
+sg.Parent = LP:WaitForChild("PlayerGui")
+
+local main = Instance.new("Frame")
+main.Size = UDim2.new(0, 240, 0, 300)
+main.Position = UDim2.new(0.5, -120, 0.4, -150)
+main.BackgroundColor3 = Color3.fromRGB(10, 10, 15)
+main.BackgroundTransparency = 0.15
+main.BorderSizePixel = 0
+main.Active = true
+main.Draggable = true
+main.Parent = sg
+Instance.new("UICorner", main).CornerRadius = UDim.new(0, 10)
+local stroke = Instance.new("UIStroke", main); stroke.Color = Color3.fromRGB(0, 243, 255); stroke.Thickness = 2
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 30); title.BackgroundTransparency = 1
+title.Text = "☠️ Combo 4X"; title.TextColor3 = Color3.fromRGB(0, 243, 255)
+title.Font = Enum.Font.GothamBlack; title.TextSize = 13; title.Parent = main
+
+local closeBtn = Instance.new("TextButton")
+closeBtn.Size = UDim2.new(0, 22, 0, 22); closeBtn.Position = UDim2.new(0, 6, 0, 4)
+closeBtn.BackgroundColor3 = Color3.fromRGB(200, 40, 40); closeBtn.Text = "X"; closeBtn.TextColor3 = Color3.new(1,1,1)
+closeBtn.Font = Enum.Font.GothamBold; closeBtn.TextSize = 12; closeBtn.Parent = main
+Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(0, 4)
+
+local minBtn = Instance.new("TextButton")
+minBtn.Size = UDim2.new(0, 22, 0, 22); minBtn.Position = UDim2.new(1, -28, 0, 4)
+minBtn.BackgroundColor3 = Color3.fromRGB(240, 180, 0); minBtn.Text = "—"; minBtn.TextColor3 = Color3.new(1,1,1)
+minBtn.Font = Enum.Font.GothamBold; minBtn.TextSize = 14; minBtn.Parent = main
+Instance.new("UICorner", minBtn).CornerRadius = UDim.new(0, 4)
+
+local showBtn = Instance.new("TextButton")
+showBtn.Size = UDim2.new(0, 70, 0, 30); showBtn.Position = UDim2.new(0, 10, 0.5, 0)
+showBtn.BackgroundColor3 = Color3.fromRGB(0, 243, 255); showBtn.Text = "МЕНЮ"; showBtn.TextColor3 = Color3.new(0,0,0)
+showBtn.Font = Enum.Font.GothamBlack; showBtn.TextSize = 12; showBtn.Visible = false; showBtn.Parent = sg
+Instance.new("UICorner", showBtn).CornerRadius = UDim.new(0, 6)
+
+local content = Instance.new("Frame")
+content.Size = UDim2.new(1, 0, 1, -30); content.Position = UDim2.new(0, 0, 0, 30)
+content.BackgroundTransparency = 1; content.Parent = main
+
+local tabContainer = Instance.new("Frame")
+tabContainer.Size = UDim2.new(1, -10, 0, 25); tabContainer.Position = UDim2.new(0, 5, 0, 0)
+tabContainer.BackgroundTransparency = 1; tabContainer.Parent = content
+
+local function makeTab(x, text)
+    local b = Instance.new("TextButton")
+    b.Size = UDim2.new(0.23, 0, 1, 0); b.Position = UDim2.new(x, 0, 0, 0)
+    b.BackgroundColor3 = Color3.fromRGB(30, 30, 35); b.Text = text
+    b.TextColor3 = Color3.fromRGB(150, 150, 150); b.Font = Enum.Font.GothamBold; b.TextSize = 9
+    b.AutoButtonColor = false; b.Parent = tabContainer
+    Instance.new("UICorner", b).CornerRadius = UDim.new(0, 4)
+    return b
+end
+
+local tab1 = makeTab(0, "FLY")
+local tab2 = makeTab(0.26, "ГОЛОВА")
+local tab3 = makeTab(0.51, "AIM")
+local tab4 = makeTab(0.76, "ESP")
+
+local page1 = Instance.new("Frame"); page1.Size = UDim2.new(1, 0, 1, -25); page1.Position = UDim2.new(0,0,0,25); page1.BackgroundTransparency = 1; page1.Parent = content
+local page2 = Instance.new("Frame"); page2.Size = UDim2.new(1, 0, 1, -25); page2.Position = UDim2.new(0,0,0,25); page2.BackgroundTransparency = 1; page2.Visible = false; page2.Parent = content
+local page3 = Instance.new("Frame"); page3.Size = UDim2.new(1, 0, 1, -25); page3.Position = UDim2.new(0,0,0,25); page3.BackgroundTransparency = 1; page3.Visible = false; page3.Parent = content
+local page4 = Instance.new("Frame"); page4.Size = UDim2.new(1, 0, 1, -25); page4.Position = UDim2.new(0,0,0,25); page4.BackgroundTransparency = 1; page4.Visible = false; page4.Parent = content
+
+local function switchTab(activeTab, activePage)
+    for _, t in ipairs({tab1, tab2, tab3, tab4}) do t.BackgroundColor3 = Color3.fromRGB(30, 30, 35); t.TextColor3 = Color3.fromRGB(150, 150, 150) end
+    page1.Visible = false; page2.Visible = false; page3.Visible = false; page4.Visible = false
+    activeTab.BackgroundColor3 = Color3.fromRGB(0, 243, 255); activeTab.TextColor3 = Color3.fromRGB(0, 0, 0)
+    activePage.Visible = true
+end
+
+tab1.MouseButton1Click:Connect(function() switchTab(tab1, page1) end)
+tab2.MouseButton1Click:Connect(function() switchTab(tab2, page2) end)
+tab3.MouseButton1Click:Connect(function() switchTab(tab3, page3) end)
+tab4.MouseButton1Click:Connect(function() switchTab(tab4, page4) end)
+switchTab(tab1, page1)
+
+local flyBtn = Instance.new("TextButton")
+flyBtn.Size = UDim2.new(0.9, 0, 0, 35); flyBtn.Position = UDim2.new(0.05, 0, 0, 5)
+flyBtn.BackgroundColor3 = Color3.fromRGB(20, 25, 30); flyBtn.Text = "🚀 FLY: ВЫКЛ"; flyBtn.TextColor3 = Color3.new(1,1,1)
+flyBtn.Font = Enum.Font.GothamBold; flyBtn.TextSize = 12; flyBtn.AutoButtonColor = false; flyBtn.Parent = page1
+Instance.new("UICorner", flyBtn).CornerRadius = UDim.new(0, 6)
+local flyStroke = Instance.new("UIStroke", flyBtn); flyStroke.Color = Color3.fromRGB(100,100,100)
+
+local flySpeedLabel = Instance.new("TextLabel")
+flySpeedLabel.Size = UDim2.new(0.9, 0, 0, 15); flySpeedLabel.Position = UDim2.new(0.05, 0, 0, 48)
+flySpeedLabel.BackgroundTransparency = 1; flySpeedLabel.Text = "СКОРОСТЬ ПОЛЁТА: 70"; flySpeedLabel.TextColor3 = Color3.fromRGB(180,180,180)
+flySpeedLabel.Font = Enum.Font.GothamBold; flySpeedLabel.TextSize = 10; flySpeedLabel.TextXAlignment = Enum.TextXAlignment.Left; flySpeedLabel.Parent = page1
+
+local flySpeedSlider = Instance.new("TextButton")
+flySpeedSlider.Size = UDim2.new(0.9, 0, 0, 6); flySpeedSlider.Position = UDim2.new(0.05, 0, 0, 68)
+flySpeedSlider.BackgroundColor3 = Color3.fromRGB(30, 35, 45); flySpeedSlider.Text = ""; flySpeedSlider.AutoButtonColor = false; flySpeedSlider.Parent = page1
+Instance.new("UICorner", flySpeedSlider).CornerRadius = UDim.new(0, 3)
+local flySliderFill = Instance.new("Frame"); flySliderFill.Size = UDim2.new(0.12, 0, 1, 0); flySliderFill.BackgroundColor3 = Color3.fromRGB(0, 243, 255)
+flySliderFill.BorderSizePixel = 0; flySliderFill.Parent = flySpeedSlider; Instance.new("UICorner", flySliderFill).CornerRadius = UDim.new(0, 3)
+local flySliderKnob = Instance.new("Frame"); flySliderKnob.Size = UDim2.new(0, 14, 0, 14); flySliderKnob.Position = UDim2.new(0.12, -7, 0.5, -7)
+flySliderKnob.BackgroundColor3 = Color3.new(1,1,1); flySliderKnob.Parent = flySpeedSlider; Instance.new("UICorner", flySliderKnob).CornerRadius = UDim.new(1, 0)
+
+local walkSpeedLabel = Instance.new("TextLabel")
+walkSpeedLabel.Size = UDim2.new(0.9, 0, 0, 15); walkSpeedLabel.Position = UDim2.new(0.05, 0, 0, 90)
+walkSpeedLabel.BackgroundTransparency = 1; walkSpeedLabel.Text = "СКОРОСТЬ ХОДЬБЫ: 16"; walkSpeedLabel.TextColor3 = Color3.fromRGB(180,180,180)
+walkSpeedLabel.Font = Enum.Font.GothamBold; walkSpeedLabel.TextSize = 10; walkSpeedLabel.TextXAlignment = Enum.TextXAlignment.Left; walkSpeedLabel.Parent = page1
+
+local walkSpeedSlider = Instance.new("TextButton")
+walkSpeedSlider.Size = UDim2.new(0.9, 0, 0, 6); walkSpeedSlider.Position = UDim2.new(0.05, 0, 0, 110)
+walkSpeedSlider.BackgroundColor3 = Color3.fromRGB(30, 35, 45); walkSpeedSlider.Text = ""; walkSpeedSlider.AutoButtonColor = false; walkSpeedSlider.Parent = page1
+Instance.new("UICorner", walkSpeedSlider).CornerRadius = UDim.new(0, 3)
+local walkSliderFill = Instance.new("Frame"); walkSliderFill.Size = UDim2.new(0.08, 0, 1, 0); walkSliderFill.BackgroundColor3 = Color3.fromRGB(255, 0, 60)
+walkSliderFill.BorderSizePixel = 0; walkSliderFill.Parent = walkSpeedSlider; Instance.new("UICorner", walkSliderFill).CornerRadius = UDim.new(0, 3)
+local walkSliderKnob = Instance.new("Frame"); walkSliderKnob.Size = UDim2.new(0, 14, 0, 14); walkSliderKnob.Position = UDim2.new(0.08, -7, 0.5, -7)
+walkSliderKnob.BackgroundColor3 = Color3.new(1,1,1); walkSliderKnob.Parent = walkSpeedSlider; Instance.new("UICorner", walkSliderKnob).CornerRadius = UDim.new(1, 0)
+
+local resetBtn = Instance.new("TextButton")
+resetBtn.Size = UDim2.new(0.9, 0, 0, 30); resetBtn.Position = UDim2.new(0.05, 0, 0, 135)
+resetBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 45); resetBtn.Text = "🔄 СБРОСИТЬ ВСЁ"; resetBtn.TextColor3 = Color3.new(1,1,1)
+resetBtn.Font = Enum.Font.GothamBold; resetBtn.TextSize = 11; resetBtn.AutoButtonColor = false; resetBtn.Parent = page1
+Instance.new("UICorner", resetBtn).CornerRadius = UDim.new(0, 6)
+local resetStroke = Instance.new("UIStroke", resetBtn); resetStroke.Color = Color3.fromRGB(100,100,100)
+
+local headBtn = Instance.new("TextButton"); headBtn.Size = UDim2.new(0.9, 0, 0, 35); headBtn.Position = UDim2.new(0.05, 0, 0, 5)
+headBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 25); headBtn.Text = "🎯 ГОЛОВА: ВЫКЛ"; headBtn.TextColor3 = Color3.new(1,1,1)
+headBtn.Font = Enum.Font.GothamBold; headBtn.TextSize = 12; headBtn.Parent = page2
+Instance.new("UICorner", headBtn).CornerRadius = UDim.new(0, 6)
+local headStroke = Instance.new("UIStroke", headBtn); headStroke.Color = Color3.fromRGB(100,100,100)
+
+local headLbl = Instance.new("TextLabel"); headLbl.Size = UDim2.new(0.9, 0, 0, 15); headLbl.Position = UDim2.new(0.05, 0, 0, 50)
+headLbl.BackgroundTransparency = 1; headLbl.Text = "РАЗМЕР ГОЛОВЫ: 30"; headLbl.TextColor3 = Color3.fromRGB(180,180,180)
+headLbl.Font = Enum.Font.GothamBold; headLbl.TextSize = 10; headLbl.TextXAlignment = Enum.TextXAlignment.Left; headLbl.Parent = page2
+
+local headSlider = Instance.new("TextButton"); headSlider.Size = UDim2.new(0.9, 0, 0, 6); headSlider.Position = UDim2.new(0.05, 0, 0, 70)
+headSlider.BackgroundColor3 = Color3.fromRGB(30, 35, 45); headSlider.Text = ""; headSlider.AutoButtonColor = false; headSlider.Parent = page2
+Instance.new("UICorner", headSlider).CornerRadius = UDim.new(0, 3)
+local headFill = Instance.new("Frame"); headFill.Size = UDim2.new(0.4, 0, 1, 0); headFill.BackgroundColor3 = Color3.fromRGB(0, 243, 255)
+headFill.BorderSizePixel = 0; headFill.Parent = headSlider; Instance.new("UICorner", headFill).CornerRadius = UDim.new(0, 3)
+local headKnob = Instance.new("Frame"); headKnob.Size = UDim2.new(0, 14, 0, 14); headKnob.Position = UDim2.new(0.4, -7, 0.5, -7)
+headKnob.BackgroundColor3 = Color3.new(1,1,1); headKnob.Parent = headSlider; Instance.new("UICorner", headKnob).CornerRadius = UDim.new(1, 0)
+
+local aimBtn = Instance.new("TextButton"); aimBtn.Size = UDim2.new(0.9, 0, 0, 35); aimBtn.Position = UDim2.new(0.05, 0, 0, 5)
+aimBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 25); aimBtn.Text = "🎯 AIM: ВЫКЛ"; aimBtn.TextColor3 = Color3.new(1,1,1)
+aimBtn.Font = Enum.Font.GothamBold; aimBtn.TextSize = 12; aimBtn.Parent = page3
+Instance.new("UICorner", aimBtn).CornerRadius = UDim.new(0, 6)
+local aimStroke = Instance.new("UIStroke", aimBtn); aimStroke.Color = Color3.fromRGB(100,100,100)
+
+local espBtn = Instance.new("TextButton"); espBtn.Size = UDim2.new(0.9, 0, 0, 35); espBtn.Position = UDim2.new(0.05, 0, 0, 5)
+espBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 25); espBtn.Text = "👁 ESP: ВЫКЛ"; espBtn.TextColor3 = Color3.new(1,1,1)
+espBtn.Font = Enum.Font.GothamBold; espBtn.TextSize = 12; espBtn.Parent = page4
+Instance.new("UICorner", espBtn).CornerRadius = UDim.new(0, 6)
+local espStroke = Instance.new("UIStroke", espBtn); espStroke.Color = Color3.fromRGB(100,100,100)
+
+local function setupCharacter(char)
+    character = char
+    humanoid  = char:WaitForChild("Humanoid")
+    rootPart  = char:WaitForChild("HumanoidRootPart")
+end
+if LP.Character then setupCharacter(LP.Character) end
+LP.CharacterAdded:Connect(setupCharacter)
+
+local function startFly()
+    if not rootPart or not humanoid then return end
+    state.fly = true
+    humanoid.PlatformStand = true
+    pcall(function() rootPart:SetNetworkOwner(LP) end)
+    bodyVelocity = Instance.new("BodyVelocity"); bodyVelocity.MaxForce = Vector3.new(1e6, 1e6, 1e6); bodyVelocity.Velocity = Vector3.zero; bodyVelocity.Parent = rootPart
+    bodyGyro = Instance.new("BodyGyro"); bodyGyro.MaxTorque = Vector3.new(1e6, 1e6, 1e6); bodyGyro.P = 2500; bodyGyro.D = 200; bodyGyro.Parent = rootPart
+    flyBtn.Text = "🔥 FLY: ВКЛ"; flyBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 60); flyStroke.Color = Color3.fromRGB(255, 0, 60)
+end
+local function stopFly()
+    state.fly = false
+    if humanoid then humanoid.PlatformStand = false end
+    if bodyVelocity then bodyVelocity:Destroy(); bodyVelocity = nil end
+    if bodyGyro then bodyGyro:Destroy(); bodyGyro = nil end
+    flyBtn.Text = "🚀 FLY: ВЫКЛ"; flyBtn.BackgroundColor3 = Color3.fromRGB(20, 25, 30); flyStroke.Color = Color3.fromRGB(100,100,100)
+end
+flyBtn.MouseButton1Click:Connect(function() if state.fly then stopFly() else startFly() end end)
+
+RunService.Heartbeat:Connect(function()
+    if not state.fly or not bodyVelocity or not bodyGyro or not rootPart or not rootPart.Parent then return end
+    local camCF = Camera.CFrame; local lookVec = camCF.LookVector; local rightVec = camCF.RightVector; local mv = readMoveVector()
+    local vel = (lookVec * (-mv.Z)) + (rightVec * mv.X)
+    if UserInputService:IsKeyDown(Enum.KeyCode.Space) then vel += Vector3.new(0,1,0) end
+    if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then vel -= Vector3.new(0,1,0) end
+    if vel.Magnitude > 0.05 then bodyVelocity.Velocity = vel.Unit * state.flySpeed else bodyVelocity.Velocity = Vector3.zero end
+    local flatLook = Vector3.new(lookVec.X, 0, lookVec.Z)
+    if flatLook.Magnitude > 0.01 then bodyGyro.CFrame = CFrame.lookAt(rootPart.Position, rootPart.Position + flatLook) end
+end)
+
+local function setFlySpeed(value)
+    local speed = tonumber(value); if not speed then return end
+    speed = math.clamp(speed, 10, 500)
+    state.flySpeed = speed
+    flySpeedLabel.Text = "СКОРОСТЬ ПОЛЁТА: " .. tostring(speed)
+    local ratio = (speed - 10) / 490
+    flySliderFill.Size = UDim2.new(ratio, 0, 1, 0); flySliderKnob.Position = UDim2.new(ratio, -7, 0.5, -7)
+end
+local function setWalkSpeed(value)
+    local speed = tonumber(value); if not speed or not humanoid then return end
+    speed = math.clamp(speed, 1, 200)
+    state.walkSpeed = speed
+    humanoid.WalkSpeed = speed
+    walkSpeedLabel.Text = "СКОРОСТЬ ХОДЬБЫ: " .. tostring(speed)
+    local ratio = (speed - 1) / 199
+    walkSliderFill.Size = UDim2.new(ratio, 0, 1, 0); walkSliderKnob.Position = UDim2.new(ratio, -7, 0.5, -7)
+end
+resetBtn.MouseButton1Click:Connect(function()
+    if state.fly then stopFly() end
+    setFlySpeed(FLY_SPEED_DEFAULT); setWalkSpeed(WALK_SPEED_DEFAULT)
+    resetBtn.Text = "✅ СБРОШЕНО"; resetBtn.BackgroundColor3 = Color3.fromRGB(0, 150, 50)
+    task.wait(1); resetBtn.Text = "🔄 СБРОСИТЬ ВСЁ"; resetBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 45)
+end)
+
+local function handleSlider(slider, knob, fill, min, max, callback)
+    local dragging = false
+    local function update(input)
+        local ratio = math.clamp((input.Position.X - slider.AbsolutePosition.X) / slider.AbsoluteSize.X, 0, 1)
+        callback(math.floor(min + ratio * (max - min)))
+    end
+    slider.InputBegan:Connect(function(i) if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then dragging = true; update(i) end end)
+    slider.InputChanged:Connect(function(i) if dragging and (i.UserInputType == Enum.UserInputType.MouseMovement or i.UserInputType == Enum.UserInputType.Touch) then update(i) end end)
+    UserInputService.InputEnded:Connect(function(i) if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then dragging = false end end)
+end
+handleSlider(flySpeedSlider, flySliderKnob, flySliderFill, 10, 500, setFlySpeed)
+handleSlider(walkSpeedSlider, walkSliderKnob, walkSliderFill, 1, 200, setWalkSpeed)
+
+local origSizes = {}; local origTransparency = {}
+local function setHeadSize(size)
+    state.headSize = size
+    headLbl.Text = "РАЗМЕР ГОЛОВЫ: " .. size
+    local ratio = (size - 10) / 40
+    headFill.Size = UDim2.new(ratio, 0, 1, 0); headKnob.Position = UDim2.new(ratio, -7, 0.5, -7)
+end
+headBtn.MouseButton1Click:Connect(function()
+    state.bigHead = not state.bigHead
+    headBtn.Text = "🎯 ГОЛОВА: " .. (state.bigHead and "ВКЛ" or "ВЫКЛ")
+    if state.bigHead then headBtn.BackgroundColor3 = Color3.fromRGB(0, 200, 0); headStroke.Color = Color3.fromRGB(0, 200, 0)
+    else
+        headBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 25); headStroke.Color = Color3.fromRGB(100,100,100)
+        for part, size in pairs(origSizes) do
+            if part and part.Parent then pcall(function() part.Size = size; part.Transparency = origTransparency[part] or 0; part.CanCollide = true end) end
+        end
+        origSizes = {}; origTransparency = {}
+    end
+end)
+RunService.Heartbeat:Connect(function()
+    if state.bigHead then
+        for _, plr in ipairs(Players:GetPlayers()) do
+            if plr ~= LP and plr.Character then
+                for _, part in ipairs(plr.Character:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        if not origSizes[part] then origSizes[part] = part.Size; origTransparency[part] = part.Transparency end
+                        local target = (part.Name == "Head") and state.headSize or 15
+                        if part.Size ~= Vector3.new(target, target, target) then
+                            pcall(function() part.Size = Vector3.new(target, target, target); part.Transparency = 0.4; part.Color = Color3.fromRGB(255,50,50); part.Material = Enum.Material.Neon; part.CanCollide = false end)
+                        end
+                    end
+                end
+            end
+        end
+    end
+end)
+
+aimBtn.MouseButton1Click:Connect(function()
+    state.aim = not state.aim
+    aimBtn.Text = "🎯 AIM: " .. (state.aim and "ВКЛ" or "ВЫКЛ")
+    if state.aim then aimBtn.BackgroundColor3 = Color3.fromRGB(231, 76, 60); aimStroke.Color = Color3.fromRGB(231, 76, 60)
+    else aimBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 25); aimStroke.Color = Color3.fromRGB(100,100,100) end
+end)
+RunService.RenderStepped:Connect(function()
+    if state.aim then
+        local closest, minDist = nil, state.aimFOV
+        local center = Vector2.new(Camera.ViewportSize.X/2, Camera.ViewportSize.Y/2)
+        for _, plr in ipairs(Players:GetPlayers()) do
+            if plr ~= LP and plr.Character then
+                local head = plr.Character:FindFirstChild("Head")
+                local hum = plr.Character:FindFirstChildOfClass("Humanoid")
+                if head and hum and hum.Health > 0 then
+                    local sp, onScreen = Camera:WorldToViewportPoint(head.Position)
+                    if onScreen and sp.Z > 0 then
+                        local d = (Vector2.new(sp.X, sp.Y) - center).Magnitude
+                        if d < minDist then minDist = d; closest = head end
+                    end
+                end
+            end
+        end
+        if closest then Camera.CFrame = Camera.CFrame:Lerp(CFrame.new(Camera.CFrame.Position, closest.Position), state.aimSmooth) end
+    end
+end)
+
+local espData = {}
+local function createESP(plr)
+    if plr == LP or espData[plr] then return end
+    local char = plr.Character; if not char then return end
+    local hrp = char:FindFirstChild("HumanoidRootPart"); local hum = char:FindFirstChildOfClass("Humanoid")
+    if not hrp or not hum then return end
+    local hl = Instance.new("Highlight"); hl.FillColor = Color3.fromRGB(255, 60, 60); hl.FillTransparency = 0.7; hl.OutlineColor = Color3.fromRGB(255,0,0); hl.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop; hl.Parent = char
+    local bb = Instance.new("BillboardGui"); bb.Size = UDim2.new(0, 200, 0, 60); bb.StudsOffset = Vector3.new(0, 3.5, 0); bb.AlwaysOnTop = true; bb.Parent = hrp
+    local nameLbl = Instance.new("TextLabel"); nameLbl.Size = UDim2.new(1, 0, 0.4, 0); nameLbl.BackgroundTransparency = 1; nameLbl.TextColor3 = Color3.new(1,1,1); nameLbl.TextStrokeTransparency = 0; nameLbl.TextSize = 14; nameLbl.Font = Enum.Font.GothamBold; nameLbl.Text = plr.Name; nameLbl.Parent = bb
+    local hpBg = Instance.new("Frame"); hpBg.Size = UDim2.new(0.8, 0, 0.15, 0); hpBg.Position = UDim2.new(0.1, 0, 0.45, 0); hpBg.BackgroundColor3 = Color3.fromRGB(30,30,30); hpBg.Parent = bb; Instance.new("UICorner", hpBg).CornerRadius = UDim.new(0, 3)
+    local hpFg = Instance.new("Frame"); hpFg.Size = UDim2.new(1, 0, 1, 0); hpFg.BackgroundColor3 = Color3.fromRGB(80,255,80); hpFg.Parent = hpBg; Instance.new("UICorner", hpFg).CornerRadius = UDim.new(0, 3)
+    local distLbl = Instance.new("TextLabel"); distLbl.Size = UDim2.new(1, 0, 0.3, 0); distLbl.Position = UDim2.new(0, 0, 0.65, 0); distLbl.BackgroundTransparency = 1; distLbl.TextColor3 = Color3.fromRGB(200,200,200); distLbl.TextStrokeTransparency = 0; distLbl.TextSize = 11; distLbl.Font = Enum.Font.Gotham; distLbl.Text = "0m"; distLbl.Parent = bb
+    espData[plr] = { hl = hl, bb = bb, hp = hpFg, dist = distLbl, hum = hum, hrp = hrp }
+end
+local function removeESP(plr)
+    if espData[plr] then
+        if espData[plr].hl then espData[plr].hl:Destroy() end
+        if espData[plr].bb then espData[plr].bb:Destroy() end
+        espData[plr] = nil
+    end
+end
+espBtn.MouseButton1Click:Connect(function()
+    state.esp = not state.esp
+    espBtn.Text = "👁 ESP: " .. (state.esp and "ВКЛ" or "ВЫКЛ")
+    if state.esp then
+        espBtn.BackgroundColor3 = Color3.fromRGB(200,50,50); espStroke.Color = Color3.fromRGB(200,50,50)
+        for _, plr in ipairs(Players:GetPlayers()) do if plr ~= LP then createESP(plr) end end
+    else
+        espBtn.BackgroundColor3 = Color3.fromRGB(20,20,25); espStroke.Color = Color3.fromRGB(100,100,100)
+        for plr, _ in pairs(espData) do removeESP(plr) end
+    end
+end)
+RunService.RenderStepped:Connect(function()
+    if not state.esp then return end
+    local myPos = Camera.CFrame.Position
+    for plr, data in pairs(espData) do
+        if not data.hrp or not data.hrp.Parent or not data.hum or data.hum.Health <= 0 then removeESP(plr)
+        else
+            local dist = (myPos - data.hrp.Position).Magnitude
+            data.dist.Text = math.floor(dist) .. "m"
+            local hpPct = math.clamp(data.hum.Health / data.hum.MaxHealth, 0, 1)
+            data.hp.Size = UDim2.new(hpPct, 0, 1, 0)
+            data.hp.BackgroundColor3 = Color3.fromRGB(math.floor(255*(1-hpPct)), math.floor(255*hpPct), 80)
+        end
+    end
+end)
+
+Players.PlayerAdded:Connect(function(plr)
+    plr.CharacterAdded:Connect(function()
+        task.wait(1)
+        if state.esp then createESP(plr) end
+    end)
+end)
+Players.PlayerRemoving:Connect(function(plr) removeESP(plr) end)
+LP.CharacterAdded:Connect(function()
+    if state.esp then
+        task.wait(1)
+        for _, plr in ipairs(Players:GetPlayers()) do if plr ~= LP then createESP(plr) end end
+    end
+end)
+
+local isMinimized = false
+closeBtn.MouseButton1Click:Connect(function() main.Visible = false; showBtn.Visible = true end)
+showBtn.MouseButton1Click:Connect(function() main.Visible = true; showBtn.Visible = false end)
+minBtn.MouseButton1Click:Connect(function()
+    isMinimized = not isMinimized
+    if isMinimized then content.Visible = false; main.Size = UDim2.new(0, 240, 0, 32); minBtn.Text = "+"
+    else content.Visible = true; main.Size = UDim2.new(0, 240, 0, 300); minBtn.Text = "—" end
+end)
+
+setHeadSize(30); setFlySpeed(FLY_SPEED_DEFAULT); if humanoid then setWalkSpeed(WALK_SPEED_DEFAULT) end
+print("[Arceus] Combo 4X loaded")`
+            }
+        ];
+
+        const container = document.getElementById('scripts-container');
+
+        scripts.forEach(script => {
+            const card = document.createElement('div');
+            card.className = `card ${script.colorClass}`;
+
+            card.innerHTML = `
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="icon-box">${script.icon}</div>
+                        ${script.title}
+                    </div>
+                </div>
+                <div style="font-size: 0.8rem; color: #aaa; margin-bottom: 15px;">${script.desc}</div>
+                <div class="code-container">
+                    <pre><code id="code-${script.id}"></code></pre>
+                    <div class="code-fade"></div>
+                </div>
+                <button class="copy-btn ${script.btnClass}" onclick="copyCode('${script.id}')">
+                    📋 Скопировать скрипт
+                </button>
+            `;
+
+            container.appendChild(card);
+            
+            document.getElementById(`code-${script.id}`).textContent = script.code;
+        });
+
+        function copyCode(id) {
+            const codeElement = document.getElementById(`code-${id}`);
+            const textToCopy = codeElement.textContent;
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showToast();
+            }).catch(err => {
+                const textArea = document.createElement("textarea");
+                textArea.value = textToCopy;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast();
+            });
+        }
+
+        function showToast() {
+            const toast = document.getElementById("toast");
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    </script>
+</body>
+    </html>
