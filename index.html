@@ -2647,7 +2647,7 @@ print("[Arceus] AUTO FUEL v7.6 (3.5s Timer) loaded")`
             setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
         }
 
-        // === СЧЕТЧИК ПОСЕТИТЕЛЕЙ ===
+        // === СЧЕТЧИК ПОСЕТИТЕЛЕЙ (NEW API: ABACUS) ===
         const counterElement = document.getElementById('visitor-counter');
         
         const urlParams = new URLSearchParams(window.location.search);
@@ -2658,19 +2658,19 @@ print("[Arceus] AUTO FUEL v7.6 (3.5s Timer) loaded")`
 
         const isOwner = localStorage.getItem('siteOwner') === 'true';
         const apiNamespace = 'sever22412'; 
-        const apiKey = 'mi-chit'; 
+        const apiKey = 'mi-chit-site'; 
 
         if (isOwner) {
-            fetch(`https://api.counterapi.dev/v1/${apiNamespace}/${apiKey}/`)
+            fetch(`https://abacus.jasoncameron.dev/get/${apiNamespace}/${apiKey}`)
                 .then(response => response.json())
-                .then(data => { counterElement.innerText = `👁 Посетителей: ${data.count || 0}`; })
-                .catch(() => { counterElement.innerText = `👁 Посетителей: ??? (API тупит)`; });
+                .then(data => { counterElement.innerText = `👁 Посетителей: ${data.value || 0}`; })
+                .catch(() => { counterElement.innerText = `👁 Посетителей: API спит...`; });
         } else {
-            fetch(`https://api.counterapi.dev/v1/${apiNamespace}/${apiKey}/up`)
+            fetch(`https://abacus.jasoncameron.dev/hit/${apiNamespace}/${apiKey}`)
                 .then(response => response.json())
-                .then(data => { counterElement.innerText = `👁 Посетителей: ${data.count || 0}`; })
-                .catch(() => { counterElement.innerText = `👁 Посетителей: ??? (API тупит)`; });
+                .then(data => { counterElement.innerText = `👁 Посетителей: ${data.value || 0}`; })
+                .catch(() => { counterElement.innerText = `👁 Посетителей: API спит...`; });
         }
     </script>
 </body>
-            </html>
+    </html>
